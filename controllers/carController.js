@@ -1,0 +1,23 @@
+import Car from "../models/CarModel.js";
+
+export const getCars = async (req, res) => {
+    try {
+        const cars = await Car.find();
+        res.status(200).json(cars);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const createCar = async (req, res) => {
+    const { brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview } = req.body;
+
+    const newCar = new Car({ brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview });
+
+    try {
+        await newCar.save();
+        res.status(201).json(newCar)
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
