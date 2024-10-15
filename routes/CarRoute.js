@@ -1,9 +1,10 @@
 import express from 'express';
-import { getCars, createCar } from "../controllers/CarController.js";
+import { getCars, createCar, getCar } from "../controllers/carController.js";
 
 const router = express.Router();
 
-router.get("/cars", getCars);
-router.post("/cars", createCar);
+router.get("/api/cars", getCars);
+router.get("/api/cars/:id", getCar)
+router.post("/api/cars", createCar);
 
 export default router;
