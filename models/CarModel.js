@@ -15,6 +15,9 @@ const carSchema = new mongoose.Schema({
     power_consumption: { type: String, required: true },
     price: { type: String, required: true }, 
     overview: { type: String, required: true },
+    engine: { type: String, required: true },
+    interior: { type: String, required: true },
+    exterior: { type: String, required: true }
 });
 
 const Car = mongoose.model("Car", carSchema);

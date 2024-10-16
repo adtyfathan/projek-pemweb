@@ -20,9 +20,9 @@ export const getCar = async (req, res) => {
 }
 
 export const createCar = async (req, res) => {
-    const { brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview } = req.body;
+    const { brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview, engine, interior, exterior } = req.body;
 
-    const newCar = new Car({ brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview });
+    const newCar = new Car({ brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview, engine, interior, exterior });
 
     try {
         await newCar.save();

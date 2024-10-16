@@ -57,6 +57,10 @@ app.get("/cars/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "model-child.html"));
 })
 
+app.get("/checkout/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "checkout.html"));
+})
+
 app.listen(port)
 
 mongoose.connect(uri).then(() => {

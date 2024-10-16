@@ -110,15 +110,27 @@ window.onload = async function () {
                 </tr>
             </table>
         </div>
-        
+
+        <button id="checkout-button">Checkout</button>  
     `;
 
         modelContainer.appendChild(contentDiv);
+
+        document.getElementById("checkout-button").addEventListener("click", () => {
+            window.location.href = `/checkout/${car._id}`
+        })
     } catch (error) {
         console.log(error)
     }
 
 }
+
+document.getElementById("button-logout").addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+});
+
+
 
 
 

@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                     changeDisplay(item);
                     contentDiv.classList.add("model-active");
                     currentData = item;
-                    console.log(currentData)
                 })
                 contentDiv.addEventListener("mouseout", () => {
                     contentDiv.classList.remove("model-active");
                 })
                 modelButton.addEventListener("click", () => {
-                    window.location.href = `/cars/${item._id}`
+
+                    window.location.href = `/cars/${currentData._id}`
                 });
                 modelContainer.appendChild(contentDiv);
             })
