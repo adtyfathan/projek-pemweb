@@ -1,6 +1,6 @@
 import News from "../models/NewsModel.js";
 
-export const getNews = async (req, res) => {
+export const getNewses = async (req, res) => {
     try {
         const news = await News.find();
         res.status(200).json(news);
@@ -8,6 +8,16 @@ export const getNews = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const getNews = async (req, res) => {
+    try {
+        const news = await News.findById(req.params.id);
+        if (!news) return res.status(404).json({ message: "News not found" });
+        res.status(200).json(news);
+    } catch (error){
+        res.status(500).json({ message: error.message });
+    }
+}
 
 export const createNews = async (req, res) => {
     const { title, description, date, image } = req.body;

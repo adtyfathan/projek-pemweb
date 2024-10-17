@@ -57,6 +57,10 @@ app.get("/cars/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "model-child.html"));
 })
 
+app.get("/news/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "news-child.html"));
+})
+
 app.get("/checkout/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "checkout.html"));
 })
