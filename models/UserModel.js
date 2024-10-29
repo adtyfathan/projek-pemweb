@@ -5,6 +5,12 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     role: { type: String, required: true }
+    // gambar
+    // no hp
+    // tgl lahir
+    // gender
+    // alamat
+    
 });
 
 const User = mongoose.model("User", userSchema);

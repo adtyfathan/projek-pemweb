@@ -10,11 +10,28 @@ export const login = async (req, res) => {
         const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return res.status(400).send("Invalid credentials");
         const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY, {expiresIn: "1h"});
-        res.json({ token });
+        res.json({ 
+            token,
+            user: {
+                _id: user._id,
+                email: user.email,
+                name: user.username,
+                role: user.email
+            }
+        });
     } catch (error) {
         console.log(error)
     }
 }
+
+export const getUser = async (req, res) => {
+    try {
+        const user = await User.find();
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 export const signup = async (req, res) => {
     try {
@@ -42,14 +59,7 @@ export const signup = async (req, res) => {
     }
 };
 
-export const getUser = async (req, res) => {
-    try {
-        const user = await User.find();
-        res.status(200).json(user);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
+
 
 export const createUser = async (req, res) => {
     const { email, username, password, role } = req.body;

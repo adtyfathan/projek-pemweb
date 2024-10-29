@@ -5,6 +5,12 @@ if (!token) {
     window.location.href = "/login";
 }
 
+const user = localStorage.getItem("user");
+
+console.log(user)
+
+
+
 let activeSlide = 2;
 
 const redirectBtn0 = document.getElementById("home-button0");

@@ -53,6 +53,10 @@ app.get("/sign-up", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "sign-up.html"));
 });
 
+app.get("/account", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "account.html"));
+});
+
 app.get("/cars/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "model-child.html"));
 })

@@ -112,6 +112,21 @@ window.onload = async function () {
         </div>
 
         <button id="checkout-button">Checkout</button>  
+
+        <p>Jumlah like: ${car.like}</p>
+
+        <h1>Comments</h1>
+        ${car.comment.map(comment => `
+                <div>
+                    <h1>${comment.name}</h1>
+                    <p>Bintang ${comment.score}</p>
+                    <p>${comment.message}</p>
+                </div>
+            `).join("")
+            }
+
+        <textarea placeholder="Masukan komen"></textarea>
+        <input type="number"/>
     `;
 
         modelContainer.appendChild(contentDiv);

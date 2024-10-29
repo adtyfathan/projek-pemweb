@@ -8,6 +8,8 @@ function getCarId() {
     return pathParts[pathParts.length - 1];
 }
 
+const modelContainer = document.getElementById("checkout-data");
+
 window.onload = async function () {
     const carId = getCarId();
 
@@ -16,8 +18,18 @@ window.onload = async function () {
         if (!response.ok) throw new Error('Failed to fetch car data');
 
         const car = await response.json();
+        console.log(car);
 
-        console.log(car)
+        const contentDiv = document.createElement("div");
+        contentDiv.innerHTML = `
+            <img src="${car.image}" width=200/>
+            <h1>${car.brand}</h1>
+            <p>${car.model}</p>
+            <p>${car.price}</p>
+        `;
+        
+        modelContainer.appendChild(contentDiv);
+
     } catch (error) {
         console.log(error)
     }

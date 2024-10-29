@@ -25,18 +25,43 @@
         </div>
     </div> -->
     <div class="checkout_wrapper">
-        <form>
-            <input type="email" id="checkout-email" placeholder="Email" required />
-            <input type="text" id="checkout-fn" placeholder="First Name" required />
-            <input type="text" id="checkout-ln" placeholder="Last Name" required />
-            <input type="text" id="checkout-address" placeholder="Address" required />
-            <input type="text" id="checkout-country" placeholder="Country" required />
-            <input type="text" id="checkout-region" placeholder="Region" required />
-            <input type="text" id="checkout-city" placeholder="City" required />
-            <input type="number" id="checkout-postal" placeholder="Postal Code" required />
-            <input type="number" id="checkout-phone" placeholder="Phone Number" required />
-            <input type="submit"/>
-        </form>
+        <div class="checkout-summary-wrapper">
+            <h1>Your Order</h1>
+            <button>Continue</button>
+            <div>
+                <p>Items</p>
+                <p>114.36</p>
+            </div>
+            <div>
+                <p>Shopping</p>
+                <p>15.10</p>
+            </div>
+            <div>
+                <p>Duties & Taxes</p>
+                <p>69696</p>
+            </div>
+
+            <div id="checkout-data">
+                
+            </div>
+        </div>
+
+
+        <div class="">
+            <form>
+                <input type="email" id="checkout-email" placeholder="Email" required />
+                <input type="text" id="checkout-fn" placeholder="First Name" required />
+                <input type="text" id="checkout-ln" placeholder="Last Name" required />
+                <input type="text" id="checkout-address" placeholder="Address" required />
+                <input type="text" id="checkout-country" placeholder="Country" required />
+                <input type="text" id="checkout-region" placeholder="Region" required />
+                <input type="text" id="checkout-city" placeholder="City" required />
+                <input type="number" id="checkout-postal" placeholder="Postal Code" required />
+                <input type="number" id="checkout-phone" placeholder="Phone Number" required />
+                <input type="submit" />
+            </form>
+        </div>
+
     </div>
 
     <script type="module" src="/checkout.js"></script>
