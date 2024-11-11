@@ -59,8 +59,6 @@ export const signup = async (req, res) => {
     }
 };
 
-
-
 export const createUser = async (req, res) => {
     const { email, username, password, role } = req.body;
 
