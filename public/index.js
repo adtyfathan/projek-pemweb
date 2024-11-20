@@ -5,11 +5,9 @@ if (!token) {
     window.location.href = "/login";
 }
 
-const user = localStorage.getItem("user");
-
-console.log(user)
-
-
+// manggil id user yang login
+// const user = localStorage.getItem("id");
+// console.log(user)
 
 let activeSlide = 2;
 
@@ -62,6 +60,6 @@ function redirect(index) {
 }
 
 document.getElementById("button-logout").addEventListener("click", () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.href = "/login";
 });

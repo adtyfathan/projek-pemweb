@@ -6,21 +6,17 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (user == null) return res.status(400).send("Invalid credentials");
+        if (user == null) return res.status(400).json({ error: "Login failed!" });
         const validPassword = await bcrypt.compare(password, user.password);
-        if (!validPassword) return res.status(400).send("Invalid credentials");
+        if (!validPassword) return res.status(400).json({ error: "Login failed!" });
         const token = jwt.sign({ userId: user._id }, process.env.JWT_KEY, {expiresIn: "1h"});
-        res.json({ 
+        res.status(201).json({ 
             token,
-            user: {
-                _id: user._id,
-                email: user.email,
-                name: user.username,
-                role: user.email
-            }
+            id: user._id
         });
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json({ error: "Server error" });
     }
 }
 
@@ -35,10 +31,10 @@ export const getUser = async (req, res) => {
 
 export const signup = async (req, res) => {
     try {
-        const { email, username, password, role } = req.body;
+        const { email, username, password } = req.body;
 
         const existingUser = await User.findOne({ email });
-        if (existingUser) return res.status(400).send("User already exists");
+        if (existingUser) return res.status(400).json({ error: "User already exists!" });
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -46,16 +42,14 @@ export const signup = async (req, res) => {
             email: email,
             password: hashedPassword,
             username: username,
-            role: role
+            role: "user"
         });
 
         await newUser.save();
-
-        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_KEY, { expiresIn: "1h" });
-        res.status(201).json({ token });
+        res.status(201).send("Register successfully");
     } catch (error) {
         console.log(error);
-        res.status(500).send("Server error");
+        res.status(500).json({ error: "Server error" });
     }
 };
 

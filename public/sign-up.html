@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="./images/Logo.ico">
-    <title>Vroom</title>
+    <title>Auto Boost</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -13,22 +13,24 @@
 </head>
 
 <body>
-    <h1>Sign up</h1>
-    <label for="input-email">Email</label>
-    <input type="email" id="input-email" name="email" required>
+    <h1>Sign Up</h1>
+    <form>
+        <label for="input-email">Email</label>
+        <input type="email" id="input-email" name="email" required>
 
-    <label for="input-username">Username</label>
-    <input type="text" id="input-username" name="username" required/>
+        <label for="input-username">Username</label>
+        <input type="text" id="input-username" name="username" required />
 
-    <label for="input-password">Password</label>
-    <input type="password" id="input-password" name="password" required>
+        <label for="input-password">Password (minimum 8 character, contain atleast one uppercase and number)</label>
+        <input type="password" id="input-password" name="password" required>
 
-    <label for="input-role">Role</label>
-    <input type="text" id="input-role" name="role" required />
+        <label for="confirm-password">Confirm Password</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
 
-    <input type="submit" class="login-button" />
+        <input type="submit" class="register-button" />
+    </form>
 
-    <a href="/login">sudah punya akun?</a>
+    <p>Have account? <a href="/login">login</a></p>
     <script src="./sign-up.js"></script>
 </body>
 
