@@ -1,5 +1,10 @@
 const modelContainer = document.getElementById("model-content");
 
+const starUrl = "/images/star.png";
+const filledStarUrl = "/images/star_filled.png"
+let starValue = 1;
+const commentForm = document.getElementById("comment-form");
+
 const token = localStorage.getItem("token");
 if (!token) {
     window.location.href = "/login";
@@ -9,6 +14,27 @@ function getCarId() {
     const pathParts = window.location.pathname.split('/');
     return pathParts[pathParts.length - 1];
 }
+
+function handleRating(element) {
+    const indexValue = element.getAttribute("data-index");
+    for(let i = 1; i <= 5; i++){
+        if(i <= indexValue){
+            document.querySelector(`[data-index="${i}"]`).src = filledStarUrl;
+        } else {
+            document.querySelector(`[data-index="${i}"]`).src = starUrl;
+        }
+    }
+    starValue = indexValue;
+    console.log(starValue)
+}
+
+commentForm.addEventListener("submit", async() => {
+    const carId = getCarId();
+
+    // const name = cari nama user berdasar id di session storage (mungkin fetch user)
+    const score = document.getElementById("comment-score");
+    const message = document.getElementById("comment-message");
+})
 
 window.onload = async function () {
     const carId = getCarId();
@@ -111,29 +137,53 @@ window.onload = async function () {
             </table>
         </div>
 
-        <button id="checkout-button">Checkout</button>  
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <button id="checkout-button" class="checkout-button">Checkout</button>  
+        </div>
 
-        <p>Jumlah like: ${car.like}</p>
-
-        <h1>Comments</h1>
-        ${car.comment.map(comment => `
+        <div class="comment-wrapper">
+            <p>Jumlah like: ${car.like}</p>
+            <div class="comment-input-container">
+                <form id="comment-form">
+                    <textarea id="comment-message" placeholder="Add a Comment" rows=8></textarea>
+                    <input id="comment-score" type="hidden" value="${starValue}"/>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div class="comment-input-star">
+                            <img data-index="1" src="${starUrl}"/>
+                            <img data-index="2" src="${starUrl}"/>
+                            <img data-index="3" src="${starUrl}"/>
+                            <img data-index="4" src="${starUrl}"/>
+                            <img data-index="5" src="${starUrl}"/>
+                        </div>
+                        <input type="submit" class="comment-button"/>
+                    </div>
+                <form>
+            </div>
+            <hr style="margin: 50px 0"></hr>
+            <h1>Comments ${car.comment.length}</h1>
+            ${car.comment.map(comment => `
                 <div>
-                    <h1>${comment.name}</h1>
+                    <h2>${comment.name}</h2>
                     <p>Bintang ${comment.score}</p>
                     <p>${comment.message}</p>
                 </div>
             `).join("")
             }
-
-        <textarea placeholder="Masukan komen"></textarea>
-        <input type="number"/>
+        </div>
     `;
+        const starImages = contentDiv.querySelectorAll(".comment-input-star img");
+        starImages.forEach((img) => {
+            img.addEventListener("click", function () {
+                handleRating(img);
+            });
+        });
 
         modelContainer.appendChild(contentDiv);
 
         document.getElementById("checkout-button").addEventListener("click", () => {
             window.location.href = `/checkout/${car._id}`
         })
+
     } catch (error) {
         console.log(error)
     }

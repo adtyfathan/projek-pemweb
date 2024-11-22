@@ -4,23 +4,31 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Vroom</title>
-    <link rel="icon" type="image/x-icon" href="./asset/Logo.ico">
+    <link rel="icon" type="image/x-icon" href="/images/Logo.ico">
+    <title>Auto Boost</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
     <div class="nav-wrapper">
         <div class="nav-container">
-            <a href="/"><img src="/images/logo.png" width="40" /></a>
-            <a href="/model">model</a>
-            <a href="/news">news</a>
-            <a href="/contact">contact</a>
-            <a id="button-logout">logout</a>
+            <div class="nav-logo">
+                <a href="/"><img src="/images/logo.png" width="40" />
+                    <h2>Auto Boost</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="/model">Model</a>
+                <a href="/news">News</a>
+                <a href="">Profile</a>
+                <a id="button-logout"><button>Logout</button></a>
+            </div>
         </div>
     </div>
 
@@ -29,9 +37,31 @@
     </div>
 
     <div class="footer">
-        <div class="footer-container">
-            <p>&copy; Copyright 2024 Vroom</p>
+        <div class="footer-logo">
             <img src="/images/logo.png" width="50" />
+            <p>&copy; Copyright 2024 Auto Boost</p>
+        </div>
+        <div class="footer-content">
+            <div class="footer-content-1">
+                <a href="/" style="font-weight: 800;">Home</a>
+                <a href="/#slide-wrapper">Top Models</a>
+                <a href="/#brand-wrapper">Top Brands</a>
+                <a href="/#news-wrapper">Top News</a>
+            </div>
+    
+            <div class="footer-content-2">
+                <a href="/model" style="font-weight: 800;">Models</a>
+                <a href="/model">Models Lists</a>
+                <a href="/news" style="font-weight: 800;">News</a>
+                <a href="/news">News Lists</a>
+            </div>
+    
+            <div class="footer-content-3">
+                <a style="font-weight: 800;">Profile (blom bikin)</a>
+                <a>Account</a>
+                <a>Transactions</a>
+                <a>Contact</a>
+            </div>
         </div>
     </div>
     <script type="module" src="/model-child.js"></script>

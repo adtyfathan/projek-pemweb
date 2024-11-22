@@ -40,3 +40,27 @@ export const createCar = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+export const updateCarComments = async (req, res) => {
+    const carId = req.params.id;
+    const { name, score, message } = req.body;
+    
+    try {
+        const result = await Car.updateOne(
+            {_id: ObjectId(carId)},
+            {
+                $push: {
+                    comment: {
+                        name,
+                        score,
+                        message,
+                        createdAt: new Date()
+                    }
+                }
+            }
+        );    
+        res.status(200).json(result);
+    } catch(error){
+        res.status(400).json({ message: error.message });
+    }
+}
