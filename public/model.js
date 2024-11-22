@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     contentDiv.classList.remove("model-active");
                 })
                 modelButton.addEventListener("click", () => {
-
                     window.location.href = `/cars/${currentData._id}`
                 });
                 modelContainer.appendChild(contentDiv);

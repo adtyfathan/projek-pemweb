@@ -19,6 +19,15 @@ export const getNews = async (req, res) => {
     }
 }
 
+export const getTopNews = async (req, res) => {
+    try {
+        const topNews = await News.find().sort({ like: -1 }).limit(4);
+        res.status(200).json(topNews)
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const createNews = async (req, res) => {
     const { title, description, date, image } = req.body;
 

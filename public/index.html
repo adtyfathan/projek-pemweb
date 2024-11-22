@@ -5,10 +5,12 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/x-icon" href="./images/Logo.ico">
-    <title>Vroom</title>
+    <title>Auto Boost</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -16,17 +18,23 @@
 <body>
     <div class="nav-wrapper">
         <div class="nav-container">
-            <a href="/"><img src="./images/logo.png" width="40" /></a>
-            <a href="/model">model</a>
-            <a href="/news">news</a>
-            <a href="/contact">contact</a>
-            <a id="button-logout">logout</a>
+            <div class="nav-logo">
+                <a href="/"><img src="./images/logo.png" width="40" /><h2>Auto Boost</h2></a>
+                
+            </div>
+            <div class="nav-menu">
+                <a href="/model">Model</a>
+                <a href="/news">News</a>
+                <a href="/contact">Contact</a>
+                
+                <a id="button-logout"><button>Logout</button></a>
+            </div>
         </div>
     </div>
     <div class="landing-wrapper">
         <div class="landing-container">
-            <h4>SPORT CAR CATALOG</h4>
-            <h1>VROOM</h1>
+            <h4>SPORT CAR MARKETPLACE</h4>
+            <h1>AUTO BOOST</h1>
             <a href="#slide-wrapper"><img src="./images/arrow-white.png" width="64"
                     style="transform: rotate(90deg);" /></a>
         </div>
@@ -36,21 +44,8 @@
 
     </div>
 
-    <div id="slide-wrapper" class="slide-wrapper">
-        <div class="slide-container">
-            <h4>TOP MODELS</h4>
-            <div style="display: flex;">
-                <img id="sub-slide" src="./images/arrow-white.png" width="64"
-                    style="transform: rotate(180deg); margin-right: 20px; cursor: pointer;" />
-                <img id="add-slide" src="./images/arrow-white.png" width="64" style="cursor: pointer;" />
-            </div>
-            <h1 class="slide-header"></h1>
-            <h4 class="slide-sub"></h4>
-        </div>
-
-        <img src="../images/porsche-slide.jpg" width="100" data-index=0 class="slide-img" />
-        <img src="../images/ferrari-slide.jpg" width="100" data-index=1 class="slide-img" />
-        <img src="../images/revuelto.jpg" width="100" data-index=2 class="slide-img active" />
+    <div id="slide-wrapper">
+        
     </div>
 
     <div class="brand-wrapper">
@@ -104,59 +99,7 @@
         <img class="contact-home-img" src="./images/contact.jpg" />
     </div>
 
-    <div class="news-wrapper">
-        <h1 class="news-header">HEADLINE NEWS</h1>
-        <img src="./images/tesla_n.jpg" style="width: 100%;" />
-        <div class="home-news-container">
-            <div class="home-news-content">
-                <h4>10 JUNE 2024</h4>
-                <h1>Tesla Introduces Next-Generation Autopilot Technology</h1>
-                <p>Tesla has unveiled its next-generation Autopilot technology, promising significant advancements in
-                    autonomous driving capabilities. </p>
-            </div>
-            <div class="home-news-button">
-                <button id="home-button0" class="news-button">
-                    READ MORE
-                </button>
-            </div>
-        </div>
-
-        <div class="news-container">
-            <img src="./images/rivian_n.jpg" width="100" />
-            <div class="news-content">
-                <h4>10 JUNE 2024</h4>
-                <h1>Rivian Announces the New R1S Electric SUV</h1>
-                <div>
-                    <button id="home-button1" class="news-button">READ MORE</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="news-container">
-            <img src="./images/bmw_n2.jpg" width="100" />
-            <div class="news-content">
-                <h4>9 JUNE 2024</h4>
-                <h1>BMW X7 2024 Review: Luxury and Practicality</h1>
-                <div>
-                    <button id="home-button2" class="news-button">READ MORE</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="news-container">
-            <img src="./images/porsche_n4.jpg" width="100" />
-            <div class="news-content">
-                <h4>8 JUNE 2024</h4>
-                <h1>Porsche Taycan Debuts Hybrid Model with Extended Range</h1>
-                <div>
-                    <button id="home-button3" class="news-button">READ MORE</button>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center;">
-            <a href="/news"><button class="news-redirect">SEE ALL</button></a>
-        </div>
+    <div id="news-wrapper">
 
     </div>
 

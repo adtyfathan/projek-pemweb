@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
             const button = contentDiv.querySelector(".news-button");
             button.addEventListener("click", () => {
-                window.location.href = `/news/${item._id}`
+                window.location.href = `/news/${item._id}`;
             });
             newsWrapper.appendChild(contentDiv);
         })

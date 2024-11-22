@@ -19,6 +19,15 @@ export const getCar = async (req, res) => {
     }
 }
 
+export const getTopCars = async (req, res) => {
+    try {
+        const topModels = await Car.find().sort({ like: -1 }).limit(3);
+        res.status(200).json(topModels)
+    } catch(error){
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const createCar = async (req, res) => {
     const { brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview, engine, interior, exterior, like, comment } = req.body;
 
