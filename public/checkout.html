@@ -4,64 +4,74 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vroom</title>
     <link rel="icon" type="image/x-icon" href="/images/Logo.ico">
+    <title>Auto Boost</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body>
-    <!-- <div class="nav-wrapper">
+    <div class="nav-wrapper">
         <div class="nav-container">
-            <a href="/"><img src="/images/logo.png" width="40" /></a>
-            <a href="/model">model</a>
-            <a href="/news">news</a>
-            <a href="/contact">contact</a>
-            <a id="button-logout">logout</a>
-        </div>
-    </div> -->
-    <div class="checkout_wrapper">
-        <div class="checkout-summary-wrapper">
-            <h1>Your Order</h1>
-            <button>Continue</button>
-            <div>
-                <p>Items</p>
-                <p>114.36</p>
+            <div class="nav-logo">
+                <a href="/"><img src="/images/logo.png" width="40" />
+                    <h2>Auto Boost</h2>
+                </a>
             </div>
-            <div>
-                <p>Shopping</p>
-                <p>15.10</p>
-            </div>
-            <div>
-                <p>Duties & Taxes</p>
-                <p>69696</p>
-            </div>
-
-            <div id="checkout-data">
-                
+            <div class="nav-menu">
+                <a href="/model">Model</a>
+                <a href="/news">News</a>
+                <a href="">Profile</a>
+                <a id="button-logout"><button>Logout</button></a>
             </div>
         </div>
+    </div>
 
-
-        <div class="">
-            <form>
+    <div class="checkout-wrapper">
+        <div class="checkout-input-container">
+            <h1>Delivery Address</h1>
+            <form class="checkout-form">
+                <label>Email</label>
                 <input type="email" id="checkout-email" placeholder="Email" required />
+                <label>First Name</label>
                 <input type="text" id="checkout-fn" placeholder="First Name" required />
+                <label>Last Name</label>
                 <input type="text" id="checkout-ln" placeholder="Last Name" required />
+                <label>Address</label>
                 <input type="text" id="checkout-address" placeholder="Address" required />
+                <label>Country</label>
                 <input type="text" id="checkout-country" placeholder="Country" required />
+                <label>Region</label>
                 <input type="text" id="checkout-region" placeholder="Region" required />
+                <label>City</label>
                 <input type="text" id="checkout-city" placeholder="City" required />
+                <label>Postal Code</label>
                 <input type="number" id="checkout-postal" placeholder="Postal Code" required />
+                <label>Phone Number</label>
                 <input type="number" id="checkout-phone" placeholder="Phone Number" required />
-                <input type="submit" />
+                <hr>
+                <h1>Payment Option</h1>
+                
+                <div class="checkout-form-option">
+                    <input id="va" type="radio" name="payment-option" value="virtual-account" />
+                    <label for="va">Virtual Account</label>
+                </div>
+               
+                <input type="submit" class="checkout-button" style="width: 100px; margin: 40px 0;"/>
+                
             </form>
         </div>
 
+        <div class="checkout-summary-wrapper">
+            <div id="checkout-data">
+
+            </div>
+        </div>
     </div>
 
     <script type="module" src="/checkout.js"></script>

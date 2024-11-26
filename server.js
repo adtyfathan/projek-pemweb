@@ -33,10 +33,6 @@ app.get("/model", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "model.html"));
 })
 
-// app.get("/model/model-child", (req, res) => {
-//     res.sendFile(path.join(__dirname, "public", "model-child.html"));
-// })
-
 app.get("/news", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "news.html"))
 });
