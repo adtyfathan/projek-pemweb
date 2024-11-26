@@ -1,4 +1,6 @@
 import Car from "../models/CarModel.js";
+import { ObjectId } from 'mongodb';
+
 
 export const getCars = async (req, res) => {
     try {
@@ -43,15 +45,17 @@ export const createCar = async (req, res) => {
 
 export const updateCarComments = async (req, res) => {
     const carId = req.params.id;
-    const { name, score, message } = req.body;
+    const { name, image, score, message } = req.body;
+    console.log(carId)
     
     try {
         const result = await Car.updateOne(
-            {_id: ObjectId(carId)},
+            {_id: carId},
             {
                 $push: {
                     comment: {
                         name,
+                        image,
                         score,
                         message,
                         createdAt: new Date()

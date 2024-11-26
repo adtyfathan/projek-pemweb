@@ -3,7 +3,6 @@ const modelContainer = document.getElementById("model-content");
 const starUrl = "/images/star.png";
 const filledStarUrl = "/images/star_filled.png"
 let starValue = 1;
-const commentForm = document.getElementById("comment-form");
 
 const token = localStorage.getItem("token");
 if (!token) {
@@ -25,16 +24,8 @@ function handleRating(element) {
         }
     }
     starValue = indexValue;
-    console.log(starValue)
+    document.getElementById("comment-score").value = starValue;
 }
-
-commentForm.addEventListener("submit", async() => {
-    const carId = getCarId();
-
-    // const name = cari nama user berdasar id di session storage (mungkin fetch user)
-    const score = document.getElementById("comment-score");
-    const message = document.getElementById("comment-message");
-})
 
 window.onload = async function () {
     const carId = getCarId();
@@ -162,10 +153,18 @@ window.onload = async function () {
             <hr style="margin: 50px 0"></hr>
             <h1>Comments ${car.comment.length}</h1>
             ${car.comment.map(comment => `
-                <div>
-                    <h2>${comment.name}</h2>
-                    <p>Bintang ${comment.score}</p>
-                    <p>${comment.message}</p>
+                <div class="comment-container">
+                    <div class="comment-image">
+                        <img src="${comment.image}"/>
+                    </div>
+                    <div class="comment-display">
+                        <div class="comment-display-header">
+                            <h2>${comment.name}</h2>
+                            <p>Bintang ${comment.score}</p>
+                            <p>${comment.createdAt}</p>
+                        </div>
+                        <p>${comment.message}</p>
+                    </div>
                 </div>
             `).join("")
             }
@@ -182,6 +181,40 @@ window.onload = async function () {
 
         document.getElementById("checkout-button").addEventListener("click", () => {
             window.location.href = `/checkout/${car._id}`
+        })
+
+        document.getElementById("comment-form").addEventListener("submit", async(event) => {
+            try {
+                event.preventDefault();
+                const userId = localStorage.getItem("id");
+                const responseUser = await fetch(`/api/user/${userId}`);
+                if (!responseUser.ok) throw new Error('Failed to fetch user data');
+
+                const user = await responseUser.json();
+                
+                const name = user.username
+                const image = user.image
+                const score = parseInt(document.getElementById("comment-score").value);
+                const message = document.getElementById("comment-message").value;
+
+                const carId = getCarId();
+
+                const responseComment = await fetch(`/api/cars/${carId}/comment`, {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify({ name, image, score, message })
+                });
+
+                if (responseComment.ok){
+                    alert('Comment added!');
+                    document.getElementById('comment-form').reset();
+                } else {
+                    throw new Error('Failed to add comment data');
+                }
+            } catch(error) {
+                console.log(error)
+            }
+            
         })
 
     } catch (error) {

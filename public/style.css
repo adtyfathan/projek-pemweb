@@ -651,6 +651,30 @@
     color: black;
 }
 
+.comment-container {
+    display: flex;
+    gap: 2%;
+    
+}
+
+.comment-image {
+    
+}
+
+.comment-image img {
+    width: 40px;
+}
+
+.comment-display {
+    width: 100%;
+}
+
+.comment-display-header {
+    display: flex;
+    align-items: center;
+    gap: 4%;
+}
+
 .news-content-child {
     margin: 200px 100px 0 100px;
 }
