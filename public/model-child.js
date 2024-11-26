@@ -151,7 +151,12 @@ window.onload = async function () {
                 <form>
             </div>
             <hr style="margin: 50px 0"></hr>
-            <h1>Comments ${car.comment.length}</h1>
+
+            <div class="comment-header">
+                <p>Comments</p>
+                <h3> ${car.comment.length}</h3>
+            </div>
+            
             ${car.comment.map(comment => `
                 <div class="comment-container">
                     <div class="comment-image">
@@ -160,8 +165,21 @@ window.onload = async function () {
                     <div class="comment-display">
                         <div class="comment-display-header">
                             <h2>${comment.name}</h2>
-                            <p>Bintang ${comment.score}</p>
-                            <p>${comment.createdAt}</p>
+                            <div>
+                                <img src="${comment.score >= 1 ? filledStarUrl : starUrl}"/>
+                                <img src="${comment.score >= 2 ? filledStarUrl : starUrl}"/>
+                                <img src="${comment.score >= 3 ? filledStarUrl : starUrl}"/>
+                                <img src="${comment.score >= 4 ? filledStarUrl : starUrl}"/>
+                                <img src="${comment.score >= 5 ? filledStarUrl : starUrl}"/>
+                            </div>
+                            <p>${(() => {
+                                // ngeformat tanggal
+                                const date = new Date(comment.createdAt);
+                                const day = String(date.getDate()).padStart(2, '0');
+                                const month = String(date.getMonth() + 1).padStart(2, '0');
+                                const year = date.getFullYear();
+                                return `${day}-${month}-${year}`;
+                            })()}</p>
                         </div>
                         <p>${comment.message}</p>
                     </div>
@@ -192,8 +210,8 @@ window.onload = async function () {
 
                 const user = await responseUser.json();
                 
-                const name = user.username
-                const image = user.image
+                const name = user.username;
+                const image = user.image;
                 const score = parseInt(document.getElementById("comment-score").value);
                 const message = document.getElementById("comment-message").value;
 
@@ -208,17 +226,18 @@ window.onload = async function () {
                 if (responseComment.ok){
                     alert('Comment added!');
                     document.getElementById('comment-form').reset();
+                    window.location.reload();
                 } else {
                     throw new Error('Failed to add comment data');
                 }
             } catch(error) {
-                console.log(error)
+                console.log(error);
             }
             
         })
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 
 }
