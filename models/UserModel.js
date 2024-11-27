@@ -11,7 +11,24 @@ const userSchema = new mongoose.Schema({
     region: { type: String, default: null },
     city: { type: String, default: null },
     postal_code: { type: Number, default: null },
-    phone_number: { type: Number, default: null }
+    phone_number: { type: Number, default: null },
+    transaction: {
+        type: [
+            {
+                id: { type: String, required: true },
+                brand: { type: String, required: true },
+                model: { type: String, required: true },
+                order_price: { type: String, required: true },
+                delivery_price: { type: String, required: true },
+                tax_price: { type: String, required: true },
+                app_price: { type: String, required: true },
+                total_price: { type: String, required: true },
+                status: { type: String, required: true },
+                createdAt: { type: Date, default: Date.now }
+            }
+        ],
+        default: null
+    }
 });
 
 const User = mongoose.model("User", userSchema);

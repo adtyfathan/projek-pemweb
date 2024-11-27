@@ -28,7 +28,6 @@ window.onload = async function () {
         if (!response.ok) throw new Error('Failed to fetch car data');
 
         const car = await response.json();
-        console.log(car);
 
         const priceInt = Number(car.price.replace(/[\$,]/g, ""));
         let orderPrice = priceInt * qty;
@@ -39,41 +38,87 @@ window.onload = async function () {
 
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = `
-            <img src="${car.image}" width=200/>
+            <div class="checkout-summary-header">
+                <img src="${car.image}" />
+                <div class="checkout-summary-header-text">
+                    <p>${car.brand} ${car.model}</p>
+                    <p>${car.price}</p>
+                </div>
+                
+            </div>
             
-            <p>${car.brand} ${car.model}</p>
-            <p>${car.price}</p>
-
-            <p>Order Summary</p>
+            <p class="checkout-summary-title">Order Summary</p>
 
             <hr/>
 
-            <div>
+            <div class="checkout-summary-row">
                 <p>Order</p>
-                <p>${toCurrency(orderPrice)}</p>
+                <p id="order-price">${toCurrency(orderPrice)}</p>
             </div>
-            <div>
+            <div class="checkout-summary-row">
                 <p>Delivery</p>
-                <p>${toCurrency(deliveryPrice)}</p>
+                <p id="delivery-price">${toCurrency(deliveryPrice)}</p>
             </div>
-            <div>
+            <div class="checkout-summary-row">
                 <p>Tax</p>
-                <p>${toCurrency(taxPrice)}</p>
+                <p id="tax-price">${toCurrency(taxPrice)}</p>
             </div>
-            <div>
+            <div class="checkout-summary-row">
                 <p>App Cost</p>
-                <p>${toCurrency(appPrice)}</p>
+                <p id="app-price">${toCurrency(appPrice)}</p>
             </div>
 
             <hr/>
 
-            <div>
-                <p>Total</p>
-                <p>${toCurrency(totalPrice)}</p>
+            <div class="checkout-summary-row">
+                <p class="checkout-summary-title">Total</p>
+                <p class="checkout-summary-title" id="total-price">${toCurrency(totalPrice)}</p>
+            </div>
+
+            <div class="checkout-qty">
+                <img src="/images/minus.png" id="sub"/>
+                <p>${qty}</p>
+                <img src="/images/plus.png" id="add"/>
             </div>
         `;
         
         modelContainer.appendChild(contentDiv);
+
+        document.getElementById("sub").addEventListener("click", () => {
+            if (qty > 1) {
+                qty--;
+                countPrice();
+                displayPrice();
+            }
+        })
+
+        document.getElementById("add").addEventListener("click", () => {
+            qty++;
+            countPrice();
+            displayPrice();
+        })
+
+        document.getElementById("button-logout").addEventListener("click", () => {
+            localStorage.clear();
+            window.location.href = "/login";
+        });
+
+        function countPrice(){
+            orderPrice = priceInt * qty;
+            deliveryPrice = orderPrice * 0.0005;
+            taxPrice = orderPrice * 0.1;
+            appPrice = priceInt * 0.001;
+            totalPrice = orderPrice + deliveryPrice + taxPrice + appPrice;
+        }
+
+        function displayPrice(){
+            document.querySelector(".checkout-qty p").textContent = qty;
+            document.getElementById("order-price").textContent = toCurrency(orderPrice);
+            document.getElementById("delivery-price").textContent = toCurrency(deliveryPrice);
+            document.getElementById("tax-price").textContent = toCurrency(taxPrice);
+            document.getElementById("app-price").textContent = toCurrency(appPrice);
+            document.getElementById("total-price").textContent = toCurrency(totalPrice);
+        }
 
     } catch (error) {
         console.log(error)
