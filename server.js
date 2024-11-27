@@ -65,6 +65,14 @@ app.get("/checkout/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "checkout.html"));
 })
 
+app.get("/payment/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "payment.html"));
+})
+
+app.get("/payment-complete/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "payment-complete.html"));
+})
+
 app.listen(port)
 
 mongoose.connect(uri).then(() => {

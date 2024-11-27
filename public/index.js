@@ -1,5 +1,3 @@
-import { news } from "./datas.js";
-
 const token = localStorage.getItem("token");
 if (!token) {
     window.location.href = "/login";
@@ -125,10 +123,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.log(error);
     }
 })
-
-// manggil id user yang login
-// const user = localStorage.getItem("id");
-// console.log(user)
 
 document.getElementById("button-logout").addEventListener("click", () => {
     localStorage.clear();

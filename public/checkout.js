@@ -151,9 +151,12 @@ window.onload = async function () {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json', },
                     body: JSON.stringify({ userId, car_id, brand, model, email, fname, lname, address, country, region, city, postal_code, phone_number, payment_option, order_price, delivery_price, tax_price, app_price, total_price, status })
-                });
-                if(responseTransaction.ok) alert("sucess")
+                })
+
                 if (!responseTransaction.ok) throw new Error('Failed to checkout');
+
+                const data = await responseTransaction.json();
+                window.location.href = `/payment/${data.transactionId}`;
             } catch (error) {
                 console.log(error);
             }

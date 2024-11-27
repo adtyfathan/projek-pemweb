@@ -29,7 +29,7 @@ const carSchema = new mongoose.Schema({
                 createdAt: { type: Date, default: Date.now }
             }
         ],
-        default: null
+        default: []
     }
 });
 

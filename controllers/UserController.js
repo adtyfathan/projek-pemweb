@@ -71,14 +71,10 @@ export const createUser = async (req, res) => {
 export const updateTransaction = async (req, res) => {
     const { userId, car_id, brand, model, email, fname, lname, address, country, region, city, postal_code, phone_number, payment_option, order_price, delivery_price, tax_price, app_price, total_price, status } = req.body;
 
-    // console.log(req.body)
     const timestamp = Math.floor(Date.now() / 1000).toString(16);
     const randomBytes = crypto.randomBytes(8).toString('hex');
     const transactionId = timestamp + randomBytes;
-    // console.log(transactionId)
     const createdAt = new Date();
-
-    // console.log(createdAt)
 
     try {
         const result = await User.updateOne(
@@ -113,8 +109,28 @@ export const updateTransaction = async (req, res) => {
                 }
             }
         );
-        res.status(200).json(result);
+        res.status(200).json({
+            message: "Transaction added successfully",
+            transactionId,
+        });
     } catch(error){
         res.status(400).json({ message: error.message });
     }
 }
+
+export const getTransaction = async (req, res) => {
+    const transactionId = req.params.id;
+    const { userId } = req.body;
+
+    try {
+        const user = await User.findOne(
+            {_id: userId, "transaction.id": transactionId},
+            { "transaction.$": 1 }
+        );
+        if (!user) return res.status(404).json({ message: 'Transaction not found' });
+        const transaction = user.transaction[0];
+        res.status(200).json(transaction);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
