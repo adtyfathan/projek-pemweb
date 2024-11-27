@@ -120,6 +120,45 @@ window.onload = async function () {
             document.getElementById("total-price").textContent = toCurrency(totalPrice);
         }
 
+        document.getElementById("checkout-form").addEventListener("submit", async(event) => {
+            try {
+                event.preventDefault();
+
+                const userId = localStorage.getItem("id");
+                const car_id = getCarId();
+                const brand = car.brand;
+                const model = car.model;
+                // 
+                const email = document.getElementById("checkout-email").value;
+                const fname = document.getElementById("checkout-fn").value;
+                const lname = document.getElementById("checkout-ln").value;
+                const address = document.getElementById("checkout-address").value;
+                const country = document.getElementById("checkout-country").value;
+                const region = document.getElementById("checkout-region").value;
+                const city = document.getElementById("checkout-city").value;
+                const postal_code = parseInt(document.getElementById("checkout-postal").value);
+                const phone_number = parseInt(document.getElementById("checkout-phone").value);
+                const payment_option = "Virtual Account";
+                // 
+                const order_price = orderPrice;
+                const delivery_price = deliveryPrice;
+                const tax_price = taxPrice;
+                const app_price = appPrice;
+                const total_price = totalPrice;
+                const status = "Process";
+
+                const responseTransaction = await fetch("/api/user/update-transaction", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify({ userId, car_id, brand, model, email, fname, lname, address, country, region, city, postal_code, phone_number, payment_option, order_price, delivery_price, tax_price, app_price, total_price, status })
+                });
+                if(responseTransaction.ok) alert("sucess")
+                if (!responseTransaction.ok) throw new Error('Failed to checkout');
+            } catch (error) {
+                console.log(error);
+            }
+        })
+
     } catch (error) {
         console.log(error)
     }

@@ -46,7 +46,6 @@ export const createCar = async (req, res) => {
 export const updateCarComments = async (req, res) => {
     const carId = req.params.id;
     const { name, image, score, message } = req.body;
-    console.log(carId)
     
     try {
         const result = await Car.updateOne(

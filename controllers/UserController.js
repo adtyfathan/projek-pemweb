@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import User from "../models/UserModel.js";
 import jwt from "jsonwebtoken";
+import crypto from 'crypto';
 
 export const login = async (req, res) => {
     try {
@@ -63,6 +64,57 @@ export const createUser = async (req, res) => {
         await newUser.save();
         res.status(201).json(newUser)
     } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
+export const updateTransaction = async (req, res) => {
+    const { userId, car_id, brand, model, email, fname, lname, address, country, region, city, postal_code, phone_number, payment_option, order_price, delivery_price, tax_price, app_price, total_price, status } = req.body;
+
+    // console.log(req.body)
+    const timestamp = Math.floor(Date.now() / 1000).toString(16);
+    const randomBytes = crypto.randomBytes(8).toString('hex');
+    const transactionId = timestamp + randomBytes;
+    // console.log(transactionId)
+    const createdAt = new Date();
+
+    // console.log(createdAt)
+
+    try {
+        const result = await User.updateOne(
+            {_id: userId},
+            {
+                $push: {
+                    transaction: {
+                        id: transactionId,
+                        car_id,
+                        brand,
+                        model,
+                        // 
+                        email,
+                        fname,
+                        lname,
+                        address,
+                        country,
+                        region,
+                        city,
+                        postal_code, // int
+                        phone_number, // int
+                        payment_option,
+                        // 
+                        order_price, // int
+                        delivery_price, // int
+                        tax_price, // int
+                        app_price, // int
+                        total_price, // int
+                        status,
+                        createdAt
+                    }
+                }
+            }
+        );
+        res.status(200).json(result);
+    } catch(error){
         res.status(400).json({ message: error.message });
     }
 }

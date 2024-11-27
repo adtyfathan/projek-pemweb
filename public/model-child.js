@@ -233,7 +233,6 @@ window.onload = async function () {
             } catch(error) {
                 console.log(error);
             }
-            
         })
 
     } catch (error) {
