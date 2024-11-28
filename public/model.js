@@ -74,7 +74,10 @@ likeImg.addEventListener("click", async () => {
     if (!currentData) return;
 
     const instanceId = currentData._id;
+    const id = instanceId;
+
     const route = (isLiked === true) ? "/api/user/remove-liked" : "/api/user/add-liked";
+    const count = (isLiked === true) ? -1 : 1;
 
     try {
         const responseLike = await fetch(route, {
@@ -89,9 +92,22 @@ likeImg.addEventListener("click", async () => {
             } else {
                 likedCars.push(instanceId);
             }
-            changeDisplay(currentData); 
         } else {
             throw new Error("Failed to update like status");
+        }
+
+        const responseLikeCount = await fetch("/api/cars/handle-like", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id, count })
+        })
+
+        if(responseLikeCount.ok){
+            const updatedData = await responseLikeCount.json();
+            currentData.like = updatedData.like;
+            changeDisplay(currentData);
+        } else {
+            throw new Error("Failed to update like count");
         }
     } catch (error) {
         console.error("Error updating like status:", error);

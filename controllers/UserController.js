@@ -138,16 +138,12 @@ export const getTransaction = async (req, res) => {
 export const addLiked = async (req, res) => {
     const { userId, instanceId, column } = req.body;
 
-    console.log("add")
-    console.log(req.body)
-
     try {
         const user = await User.findOneAndUpdate(
             {_id: userId},
             { $push: { [column]:  instanceId} }, // column = liked_cars || liked_news 
             { new: true }
         );
-        console.log(user)
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -156,16 +152,12 @@ export const addLiked = async (req, res) => {
 
 export const removeLiked = async (req, res) => {
     const { userId, instanceId, column } = req.body;
-
-    console.log(req.body)
-    console.log("remove")
     try {
         const user = await User.findOneAndUpdate(
             { _id: userId },
             { $pull: { [column]: instanceId } }, // column = liked_cars || liked_news 
             { new: true } 
         );
-        console.log(user)
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });

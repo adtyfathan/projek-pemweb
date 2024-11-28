@@ -1,6 +1,4 @@
 import Car from "../models/CarModel.js";
-import { ObjectId } from 'mongodb';
-
 
 export const getCars = async (req, res) => {
     try {
@@ -64,6 +62,20 @@ export const updateCarComments = async (req, res) => {
         );    
         res.status(200).json(result);
     } catch(error){
+        res.status(400).json({ message: error.message });
+    }
+}
+
+export const handleLike = async (req, res) => {
+    const { id, count } = req.body;
+    try {
+        const result = await Car.findOneAndUpdate(
+            {_id: id},
+            { $inc: { like: count } },
+            { new: true }
+        );
+        res.status(200).json(result);
+    } catch (error) {
         res.status(400).json({ message: error.message });
     }
 }

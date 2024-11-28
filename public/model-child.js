@@ -2,7 +2,14 @@ const modelContainer = document.getElementById("model-content");
 
 const starUrl = "/images/star.png";
 const filledStarUrl = "/images/star_filled.png"
+const userId = localStorage.getItem("id");
+const likeUrl = "/images/like.png";
+const likeFilledUrl = "/images/like_filled.png";
+const column = "liked_cars";
+let isLiked = false;
+
 let starValue = 1;
+let userLikes = null;
 
 const token = localStorage.getItem("token");
 if (!token) {
@@ -13,6 +20,8 @@ function getCarId() {
     const pathParts = window.location.pathname.split('/');
     return pathParts[pathParts.length - 1];
 }
+
+const carId = getCarId();
 
 function handleRating(element) {
     const indexValue = element.getAttribute("data-index");
@@ -28,8 +37,6 @@ function handleRating(element) {
 }
 
 window.onload = async function () {
-    const carId = getCarId();
-
     try {
         const response = await fetch(`/api/cars/${carId}`);
         if (!response.ok) throw new Error('Failed to fetch car data');
@@ -40,8 +47,16 @@ window.onload = async function () {
         contentDiv.innerHTML = `
         <div class="model-items-wrapper">
             <div class="model-items-container" style="display: block;">
-                <h4 style="font-size: 36px; font-weight: 300;">${car.brand}</h4>
-                <h1 style="font-size: 86px;">${car.model}</h1>
+                <div class="model-items-head">
+                    <div>
+                        <h4 style="font-size: 36px; font-weight: 300;">${car.brand}</h4>
+                        <h1 style="font-size: 86px;">${car.model}</h1>
+                    </div>
+                    <div class="like-container">
+                        <img src="/images/like.png" id="like-image" />
+                        <p id="like-count">${car.like}</p>
+                    </div>
+                </div>
                 <div class="model-items-sub" style="margin-top: 50px;">
                     <div style="display: flex; gap: 20px; align-items: center;">
                         <p>Price</p>
@@ -148,7 +163,7 @@ window.onload = async function () {
                         </div>
                         <input type="submit" class="comment-button"/>
                     </div>
-                <form>
+                </form>
             </div>
             <hr style="margin: 50px 0"></hr>
 
@@ -197,6 +212,17 @@ window.onload = async function () {
 
         modelContainer.appendChild(contentDiv);
 
+        const likeImg = document.getElementById("like-image");
+        const likeCount = document.getElementById("like-count");
+
+        const responseIsLiked = await fetch(`/api/user/${userId}`);
+        if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
+        const dataIsLiked = await responseIsLiked.json()
+        const likedCars = dataIsLiked.liked_cars;
+        if (likedCars.includes(car._id)) isLiked = true;
+        changeDisplay(car);
+
+
         document.getElementById("checkout-button").addEventListener("click", () => {
             window.location.href = `/checkout/${car._id}`
         })
@@ -204,7 +230,6 @@ window.onload = async function () {
         document.getElementById("comment-form").addEventListener("submit", async(event) => {
             try {
                 event.preventDefault();
-                const userId = localStorage.getItem("id");
                 const responseUser = await fetch(`/api/user/${userId}`);
                 if (!responseUser.ok) throw new Error('Failed to fetch user data');
 
@@ -214,8 +239,6 @@ window.onload = async function () {
                 const image = user.image;
                 const score = parseInt(document.getElementById("comment-score").value);
                 const message = document.getElementById("comment-message").value;
-
-                const carId = getCarId();
 
                 const responseComment = await fetch(`/api/cars/${carId}/comment`, {
                     method: "POST",
@@ -235,11 +258,49 @@ window.onload = async function () {
             }
         })
 
+        likeImg.addEventListener("click", async () => {
+            const id = carId;
+            const instanceId = carId;
+            const route = (isLiked === true) ? "/api/user/remove-liked" : "/api/user/add-liked";
+            const count = (isLiked === true) ? -1 : 1;
+
+            try {
+                const responseLike = await fetch(route, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId, instanceId, column }),
+                });
+
+                if (!responseLike.ok) throw new Error("Failed to update like status");
+
+                const responseLikeCount = await fetch("/api/cars/handle-like", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id, count })
+                })
+
+                if (!responseLikeCount.ok) throw new Error("Failed to update like count");
+                const updatedData = await responseLikeCount.json();
+
+                isLiked = !isLiked;
+                changeDisplay(updatedData);
+
+            } catch (error) {
+                console.error("Error updating like status:", error);
+            }
+        });
+
+        function changeDisplay(item) {
+            likeImg.src = isLiked ? likeFilledUrl : likeUrl;
+            likeCount.textContent = item.like;
+        }
     } catch (error) {
         console.log(error);
     }
 
 }
+
+
 
 document.getElementById("button-logout").addEventListener("click", () => {
     localStorage.removeItem("token");

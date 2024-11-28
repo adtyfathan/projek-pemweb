@@ -418,6 +418,12 @@
     font-weight: 500;
 }
 
+.model-items-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .model-items-header {
     display: flex;
     justify-content: space-between;
