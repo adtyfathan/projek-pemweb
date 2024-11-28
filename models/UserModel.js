@@ -41,6 +41,14 @@ const userSchema = new mongoose.Schema({
             }
         ],
         default: [],
+    },
+    liked_cars: {
+        type: [String],
+        default: []
+    },
+    liked_news: {
+        type: [String],
+        default: []
     }
 });
 
