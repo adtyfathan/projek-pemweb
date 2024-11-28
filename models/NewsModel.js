@@ -10,11 +10,13 @@ const newsSchema = new mongoose.Schema({
         type: [
             {
                 name: { type: String, required: true },
+                image: { type: String, default: "/images/profile-default.png" },
                 score: { type: Number, required: true },
-                message: { type: String, required: true }
+                message: { type: String, required: true },
+                createdAt: { type: Date, default: Date.now }
             }
         ],
-        default: null
+        default: []
     }
 });
 

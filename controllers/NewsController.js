@@ -40,3 +40,28 @@ export const createNews = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+export const updateNewsComments = async (req, res) => {
+    const newsId = req.params.id;
+    const { name, image, score, message } = req.body;
+
+    try {
+        const result = await News.updateOne(
+            { _id: newsId },
+            {
+                $push: {
+                    comment: {
+                        name,
+                        image,
+                        score,
+                        message,
+                        createdAt: new Date()
+                    }
+                }
+            }
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
