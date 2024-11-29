@@ -65,3 +65,17 @@ export const updateNewsComments = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+export const handleLike = async (req, res) => {
+    const { id, count } = req.body;
+    try {
+        const result = await News.findOneAndUpdate(
+            { _id: id },
+            { $inc: { like: count } },
+            { new: true }
+        );
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}

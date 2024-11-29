@@ -2,7 +2,14 @@ const newsContent = document.getElementById("news-content");
 
 const starUrl = "/images/star.png";
 const filledStarUrl = "/images/star_filled.png"
+const userId = localStorage.getItem("id");
+const likeUrl = "/images/like_black.png";
+const likeFilledUrl = "/images/like_filled.png";
+const column = "liked_news";
+let isLiked = false;
+
 let starValue = 1;
+let userLikes = null;
 
 const token = localStorage.getItem("token");
 if (!token) {
@@ -13,6 +20,8 @@ function getNewsId(){
     const pathParts = window.location.pathname.split('/');
     return pathParts[pathParts.length - 1];
 }
+
+const newsId = getNewsId();
 
 function handleRating(element) {
     const indexValue = element.getAttribute("data-index");
@@ -28,8 +37,6 @@ function handleRating(element) {
 }
 
 window.onload = async function () {
-    const newsId = getNewsId();
-
     try {
         const response = await fetch(`/api/news/${newsId}`);
         if (!response.ok) throw new Error('Failed to fetch news data');
@@ -46,7 +53,15 @@ window.onload = async function () {
             </div>
             <h1 class="news-content-child-header">${news.title}</h1>
             <img src="${news.image}" class="news-content-child-image"/>
-            <p class="news-content-child-date">${news.date}</p>
+            
+            <div class="news-content-child-sub">
+                <p class="news-content-child-date">${news.date}</p>
+                <div class="like-container news-content-like">
+                    <p id="like-count">${news.like}</p>
+                    <img src="/images/like_black.png" id="like-image" />
+                </div>
+            </div>
+            
             <p class="news-content-child-desc">${news.description}</p>
             <h1 style="margin: 100px 0 50px 0">OTHER NEWS</h1>
         `;
@@ -155,6 +170,16 @@ window.onload = async function () {
 
         newsContent.appendChild(commentDiv);
 
+        const likeImg = document.getElementById("like-image");
+        const likeCount = document.getElementById("like-count");
+
+        const responseIsLiked = await fetch(`/api/user/${userId}`);
+        if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
+        const dataIsLiked = await responseIsLiked.json()
+        const likedNews = dataIsLiked.liked_news;
+        if (likedNews.includes(news._id)) isLiked = true;
+        changeDisplay(news);
+
         document.getElementById("comment-form").addEventListener("submit", async (event) => {
             try {
                 event.preventDefault();
@@ -188,6 +213,44 @@ window.onload = async function () {
                 console.log(error);
             }
         })
+
+        likeImg.addEventListener("click", async () => {
+            const id = newsId;
+            const instanceId = newsId;
+            const route = (isLiked === true) ? "/api/user/remove-liked" : "/api/user/add-liked";
+            const count = (isLiked === true) ? -1 : 1;
+
+            try {
+                const responseLike = await fetch(route, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ userId, instanceId, column }),
+                });
+
+                if (!responseLike.ok) throw new Error("Failed to update like status");
+
+                const responseLikeCount = await fetch("/api/news/handle-like", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ id, count })
+                })
+
+                if (!responseLikeCount.ok) throw new Error("Failed to update like count");
+                const updatedData = await responseLikeCount.json();
+
+                isLiked = !isLiked;
+                changeDisplay(updatedData);
+
+            } catch (error) {
+                console.error("Error updating like status:", error);
+            }
+        });
+
+        function changeDisplay(item) {
+            likeImg.src = isLiked ? likeFilledUrl : likeUrl;
+            likeCount.textContent = item.like;
+        }
+
     } catch (error){
         console.log(error)
     }

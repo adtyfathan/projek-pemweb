@@ -929,6 +929,18 @@
     font-size: 72px;
 }
 
+.news-content-child-sub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.news-content-like {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 .news-content-child-image {
     object-fit: cover;
     width: 100%;
