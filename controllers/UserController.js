@@ -163,3 +163,19 @@ export const removeLiked = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export const updateProfile = async (req, res) => {
+    const { userId, username, address, country, region, city, postal_code, phone_number } = req.body;
+    try {
+        const user = await User.updateOne(
+            { _id: userId },
+            {
+                $set: { username, address, country, region, city, postal_code, phone_number }
+            },
+        );
+        res.status(200).json({ message: "profile data changed"});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
