@@ -73,6 +73,22 @@ app.get("/payment-complete/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "payment-complete.html"));
 })
 
+app.get("/profile-data", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "profile-data.html"));
+})
+
+app.get("/profile-transaction", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "profile-transaction.html"));
+})
+
+app.get("/profile-account", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "profile-account.html"));
+})
+
+app.get("/profile-contact", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "profile-contact.html"));
+})
+
 app.listen(port)
 
 mongoose.connect(uri).then(() => {

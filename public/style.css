@@ -957,6 +957,38 @@
     margin-top: 50px;
 }
 
+.profile-wrapper {
+    height: 100vh;
+    display: flex;
+    padding: 125px 7.5% 0 7.5%;
+}
+
+.profile-wrapper-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15%;
+    border-right: 1px solid black;
+}
+
+.profile-wrapper-left a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+
+.profile-wrapper-left .profile-active {
+    color: white;
+    background-color: black;
+    padding: 8px 30px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+.profile-wrapper-right {
+    flex: 4;
+}
+
 .contact-wrapper {
     display: flex;
     height: 100vh;

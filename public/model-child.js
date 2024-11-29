@@ -148,7 +148,6 @@ window.onload = async function () {
         </div>
 
         <div class="comment-wrapper">
-            <p>Jumlah like: ${car.like}</p>
             <div class="comment-input-container">
                 <form id="comment-form">
                     <textarea id="comment-message" placeholder="Add a Comment" rows=8></textarea>
