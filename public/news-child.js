@@ -106,7 +106,6 @@ window.onload = async function () {
         const commentDiv = document.createElement("div");
         commentDiv.classList.add("comment-wrapper");
         commentDiv.innerHTML = `
-            <p>Jumlah like: ${news.like}</p>
             <div class="comment-input-container">
                 <form id="comment-form">
                     <textarea id="comment-message" placeholder="Add a Comment" rows=8></textarea>

@@ -145,7 +145,7 @@ window.onload = async function () {
                 const tax_price = taxPrice;
                 const app_price = appPrice;
                 const total_price = totalPrice;
-                const status = "Process";
+                const status = "Paid";
 
                 const responseTransaction = await fetch("/api/user/update-transaction", {
                     method: "POST",

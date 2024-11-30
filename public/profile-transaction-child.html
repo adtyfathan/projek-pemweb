@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -32,20 +31,22 @@
         </div>
     </div>
 
-    <div class="complete-wrapper" id="complete-wrapper">
-        <div class="complete-container">
-            <div class="complete-header">
-                <p>Invoice </p>
-                <h1 id="complete-header"></h1>
-            </div>
-            <img src="/images/check.png" width="240"/>
-            <h1>Payment Completed</h1>
+    <div class="profile-wrapper">
+        <div class="profile-wrapper-left">
+            <a id="profile-data" href="/profile-data">My Profile</a>
+            <a id="profile-transaction" href="/profile-transaction">Transactions</a>
+            <a id="profile-account" href="/profile-account">Account</a>
+            <a id="profile-contact" href="/profile-contact">Contact Us</a>
         </div>
-        <p id="complete-redirect" class="complete-redirect">You will redirected to Homepage in 10</p>
+
+        <div class="profile-wrapper-right">
+            <div id="profile-transaction-child-wrapper">
+                <img src="/images/arrow.png" class="transaction-back" id="transaction-back"/>
+            </div>
+        </div>
     </div>
 
-
-    <script type="module" src="/payment-complete.js"></script>
+    <script type="module" src="/profile-transaction-child.js"></script>
 </body>
 
 </html>

@@ -65,10 +65,12 @@ window.onload = async function () {
                     <div style="display: flex; gap: 20px; align-items: center;">
                         <p>Max Speed</p>
                         <h4 class="model-speed">${car.max_speed}</h4>
+                        <p>km/h</p>
                     </div>
                     <div style="display: flex; gap: 20px; align-items: center;">
                         <p>Power</p>
                         <h4 class="model-power">${car.power}</h4>
+                        <p>cv</p>
                     </div>
                 </div>
             </div>
@@ -122,15 +124,15 @@ window.onload = async function () {
             <table class="model-table">
                 <tr>
                     <td><h4>MAX POWER</h4></td>
-                    <td style="text-align: end;"><p>${car.power}</p></td>
+                    <td style="text-align: end;"><p>${car.power} cv</p></td>
                 </tr>
                 <tr>
                     <td><h4>TOP SPEED</h4></td>
-                    <td style="text-align: end;"><p>${car.max_speed}</p></td>
+                    <td style="text-align: end;"><p>${car.max_speed} km/h</p></td>
                 </tr>
                 <tr>
                     <td><h4>ACCELERATION</h4></td>
-                    <td style="text-align: end;"><p>${car.acceleration}</p></td>
+                    <td style="text-align: end;"><p>${car.acceleration}s</p></td>
                 </tr>
                 <tr>
                     <td><h4>POWER CONSUMPTION</h4></td>

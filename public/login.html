@@ -13,18 +13,30 @@
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form>
-        <label for="input-email">Email</label>
-        <input type="email" id="input-email" name="email" required>
-        
-        <label for="input-password">Password</label>
-        <input type="password" id="input-password" name="password" required>
-        
-        <input type="submit" class="login-button" />
-    </form>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-header">
+                <img src="/images/logo.png" />
+                <h1>Auto Boost</h1>
+            </div>
+            <form class="auth-form">
+                <div class="auth-row">
+                    <label for="input-email">Email</label>
+                    <input type="email" id="input-email" name="email" required>
+                </div>
     
-    <p>No account? <a href="/sign-up">sign up</a></p>
+                <label for="input-password">Password</label>
+                <div class="password-input" style="margin-bottom: 20px;">
+                    <input id="input-password" type="password" name="password" required />
+                    <img class="toggle-password" src="/images/eye.png" />
+                </div>
+    
+                <p style="align-self: center; margin: 20px 0;">No account? <a href="/sign-up">sign up</a></p>
+                <input id="login-button" type="submit" class="profile-button" style="width: fit-content; align-self: center;" />
+            </form>
+        </div>
+    </div>
+    
     <script src="./login.js"></script>
 </body>
 

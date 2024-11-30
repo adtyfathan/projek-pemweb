@@ -40,7 +40,28 @@
         </div>
 
         <div class="profile-wrapper-right">
+            <div class="profile-account-wrapper">
+                <form id="profile-account-form">
+                    <h3>Email</h3>
+                    <input id="email" type="text" class="profile-input-email" disabled/>
 
+                    <h1 style="margin: 100px 0 40px 0;">Change Password</h1>
+
+                    <label>Verify Old Password</label>
+                    <div class="password-input" style="margin-bottom: 40px;">
+                        <input id="old-password" type="password" required />
+                        <img class="toggle-password" src="/images/eye.png"/>
+                    </div>
+                    
+                    <label>New Password (minimum 8 character, contain atleast one uppercase and number)</label>
+                    <div class="password-input" style="margin-bottom: 40px;">
+                        <input id="new-password" type="password" required />
+                        <img class="toggle-password" src="/images/eye.png" />
+                    </div>
+                    
+                    <input type="submit" value="Change" class="profile-button"/>
+                </form>
+            </div>
         </div>
     </div>
 

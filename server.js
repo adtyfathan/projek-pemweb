@@ -89,6 +89,10 @@ app.get("/profile-contact", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "profile-contact.html"));
 })
 
+app.get("/profile-transaction-child/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "profile-transaction-child.html"));
+})
+
 app.listen(port)
 
 mongoose.connect(uri).then(() => {

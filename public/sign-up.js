@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "/";
     }
 
-    document.querySelector(".register-button").addEventListener("click", async (event) => {
+    document.getElementById("register-button").addEventListener("click", async (event) => {
         event.preventDefault();
 
         let email = document.getElementById('input-email').value;
@@ -41,4 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
             alert(error.message);
         }
     })
+});
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("toggle-password")) {
+        const passwordInput = event.target.previousElementSibling;
+        const isPassword = passwordInput.type === "password";
+
+        passwordInput.type = isPassword ? "text" : "password";
+    }
 });
