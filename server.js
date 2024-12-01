@@ -8,13 +8,13 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+dotenv.config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
-
 const uri = process.env.MONGODB_URI;
-const port = 27017;
+const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(cors());
@@ -93,13 +93,12 @@ app.get("/profile-transaction-child/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "profile-transaction-child.html"));
 })
 
-app.listen(port)
-
-mongoose.connect(uri).then(() => {
-    console.log("connect");
-    app.listen(3000, () => {
-        console.log(`mongodb di port 27017`);
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("connected to mongodb");
+        app.listen(port, () => {
+            console.log(`running in ${port}`);
+        });
+    }).catch((error) => {
+        console.log(error);
     });
-}).catch((error) => {
-    console.log(error);
-});
