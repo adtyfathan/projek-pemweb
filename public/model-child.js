@@ -10,11 +10,7 @@ let isLiked = false;
 
 let starValue = 1;
 let userLikes = null;
-
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
-}
+const role = localStorage.getItem("role");
 
 function getCarId() {
     const pathParts = window.location.pathname.split('/');
@@ -24,6 +20,12 @@ function getCarId() {
 const carId = getCarId();
 
 function handleRating(element) {
+    if(role !== "user"){
+        alert("You dont have the access!");
+        if (!role) window.location.href = "/login";
+        return;
+    }
+
     const indexValue = element.getAttribute("data-index");
     for(let i = 1; i <= 5; i++){
         if(i <= indexValue){
@@ -149,7 +151,7 @@ window.onload = async function () {
             <button id="checkout-button" class="checkout-button">Checkout</button>  
         </div>
 
-        <div class="comment-wrapper">
+        <div id="comment-wrapper" class="comment-wrapper">
             <div class="comment-input-container">
                 <form id="comment-form">
                     <textarea id="comment-message" placeholder="Add a Comment" rows=8></textarea>
@@ -204,6 +206,7 @@ window.onload = async function () {
             }
         </div>
     `;
+
         const starImages = contentDiv.querySelectorAll(".comment-input-star img");
         starImages.forEach((img) => {
             img.addEventListener("click", function () {
@@ -213,16 +216,29 @@ window.onload = async function () {
 
         modelContainer.appendChild(contentDiv);
 
+        const commentInput = document.getElementById("comment-message");
+
+        if (role !== "user") {
+            commentInput.addEventListener("click", () => {
+                alert("You dont have the access!");
+                commentInput.disabled = "true";
+                commentInput.placeholder = "can't comment";
+                if (!role) window.location.href = "/login";
+                return;
+            })
+        }
+
         const likeImg = document.getElementById("like-image");
         const likeCount = document.getElementById("like-count");
 
-        const responseIsLiked = await fetch(`/api/user/${userId}`);
-        if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
-        const dataIsLiked = await responseIsLiked.json()
-        const likedCars = dataIsLiked.liked_cars;
-        if (likedCars.includes(car._id)) isLiked = true;
-        changeDisplay(car);
-
+        if(userId){
+            const responseIsLiked = await fetch(`/api/user/${userId}`);
+            if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
+            const dataIsLiked = await responseIsLiked.json()
+            const likedCars = dataIsLiked.liked_cars;
+            if (likedCars.includes(car._id)) isLiked = true;
+            changeDisplay(car);
+        }
 
         document.getElementById("checkout-button").addEventListener("click", () => {
             window.location.href = `/checkout/${car._id}`
@@ -260,6 +276,11 @@ window.onload = async function () {
         })
 
         likeImg.addEventListener("click", async () => {
+            if (role !== "user"){
+                alert("You dont have the access");
+                if (!role) window.location.href = "/login";
+                return;
+            } 
             const id = carId;
             const instanceId = carId;
             const route = (isLiked === true) ? "/api/user/remove-liked" : "/api/user/add-liked";
@@ -301,10 +322,8 @@ window.onload = async function () {
 
 }
 
-
-
 document.getElementById("button-logout").addEventListener("click", () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.href = "/login";
 });
 

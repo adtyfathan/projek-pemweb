@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem("id", data.id);
+                localStorage.setItem("role", data.role);
                 window.location.href = '/';
             } else {
                 const errorData = await response.json();

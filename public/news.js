@@ -1,8 +1,3 @@
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
-}
-
 let news;
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -39,6 +34,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 document.getElementById("button-logout").addEventListener("click", () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.href = "/login";
 });

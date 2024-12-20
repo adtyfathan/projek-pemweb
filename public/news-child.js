@@ -10,11 +10,7 @@ let isLiked = false;
 
 let starValue = 1;
 let userLikes = null;
-
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
-}
+const role = localStorage.getItem("role");
 
 function getNewsId(){
     const pathParts = window.location.pathname.split('/');
@@ -24,6 +20,12 @@ function getNewsId(){
 const newsId = getNewsId();
 
 function handleRating(element) {
+    if (role !== "user") {
+        alert("You dont have the access!");
+        if (!role) window.location.href = "/login";
+        return;
+    }
+
     const indexValue = element.getAttribute("data-index");
     for (let i = 1; i <= 5; i++) {
         if (i <= indexValue) {
@@ -169,15 +171,29 @@ window.onload = async function () {
 
         newsContent.appendChild(commentDiv);
 
+        const commentInput = document.getElementById("comment-message");
+
+        if (role !== "user") {
+            commentInput.addEventListener("click", () => {
+                alert("You dont have the access!");
+                commentInput.disabled = "true";
+                commentInput.placeholder = "can't comment";
+                if (!role) window.location.href = "/login";
+                return;
+            })
+        }
+
         const likeImg = document.getElementById("like-image");
         const likeCount = document.getElementById("like-count");
 
-        const responseIsLiked = await fetch(`/api/user/${userId}`);
-        if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
-        const dataIsLiked = await responseIsLiked.json()
-        const likedNews = dataIsLiked.liked_news;
-        if (likedNews.includes(news._id)) isLiked = true;
-        changeDisplay(news);
+        if (userId){
+            const responseIsLiked = await fetch(`/api/user/${userId}`);
+            if (!responseIsLiked.ok) throw new Error('Failed to fetch user data');
+            const dataIsLiked = await responseIsLiked.json()
+            const likedNews = dataIsLiked.liked_news;
+            if (likedNews.includes(news._id)) isLiked = true;
+            changeDisplay(news);
+        }
 
         document.getElementById("comment-form").addEventListener("submit", async (event) => {
             try {
@@ -214,6 +230,12 @@ window.onload = async function () {
         })
 
         likeImg.addEventListener("click", async () => {
+            if (role !== "user") {
+                alert("You dont have the access");
+                if (!role) window.location.href = "/login";
+                return;
+            } 
+
             const id = newsId;
             const instanceId = newsId;
             const route = (isLiked === true) ? "/api/user/remove-liked" : "/api/user/add-liked";
@@ -256,6 +278,6 @@ window.onload = async function () {
 }
 
 document.getElementById("button-logout").addEventListener("click", () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     window.location.href = "/login";
 });

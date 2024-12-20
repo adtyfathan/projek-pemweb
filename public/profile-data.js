@@ -63,6 +63,7 @@ window.onload = async() => {
                 </form>
             </div>
         `;
+        
         profileContainer.appendChild(contentDiv);
 
         const profileForm = document.getElementById("profile-form");

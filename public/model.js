@@ -1,8 +1,3 @@
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
-}
-
 const userId = localStorage.getItem("id");
 const image = document.querySelector(".model-image");
 const modelBrand = document.querySelector(".model-brand");
@@ -15,6 +10,7 @@ const modelButton = document.getElementById("x");
 const likeImg = document.getElementById("like-image");
 const likeCount = document.getElementById("like-count");
 
+const role = localStorage.getItem("role");
 const likeUrl = "/images/like.png";
 const likeFilledUrl = "/images/like_filled.png";
 const column = "liked_cars";
@@ -29,11 +25,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!carResponse.ok) throw new Error("Failed to fetch cars");
         const cars = await carResponse.json();
 
-        const userResponse = await fetch(`/api/user/${userId}`);
-        if (!userResponse.ok) throw new Error("Failed to fetch user");
-        const userData = await userResponse.json();
+        if (role){
+            const userResponse = await fetch(`/api/user/${userId}`);
+            if (!userResponse.ok) throw new Error("Failed to fetch user");
+            const userData = await userResponse.json();
 
-        likedCars = userData.liked_cars; 
+            likedCars = userData.liked_cars; 
+        }
 
         if (cars.length > 0) {
             currentData = cars[0]; 
@@ -72,6 +70,12 @@ modelButton.addEventListener("click", () => {
 
 likeImg.addEventListener("click", async () => {
     if (!currentData) return;
+
+    if (role !== "user") {
+        alert("You dont have the access");
+        if (!role) window.location.href = "/login";
+        return;
+    }
 
     const instanceId = currentData._id;
     const id = instanceId;

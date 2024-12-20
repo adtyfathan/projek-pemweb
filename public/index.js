@@ -1,8 +1,3 @@
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
-}
-
 const slideContainer = document.getElementById("slide-wrapper");
 const newsContainer = document.getElementById("news-wrapper");
 
@@ -11,6 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const responseCar = await fetch("/api/cars/top-cars")
         if (!responseCar.ok) throw new Error("Failed to fetch top cars models");
         const data = await responseCar.json();
+
+        console.log(localStorage.getItem("role"));
     
         const slideDiv = document.createElement("div");
         slideDiv.innerHTML = `
