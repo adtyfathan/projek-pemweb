@@ -1,9 +1,11 @@
 import express from 'express';
-import { getUser, createUser, login, signup, updateTransaction, getTransaction, addLiked, removeLiked, updateProfile, changePassword } from '../controllers/UserController.js';
+import { getUser, createUser, getAdmins, login, signup, updateTransaction, getTransaction, addLiked, removeLiked, updateProfile, changePassword, getUsers } from '../controllers/UserController.js';
 
 const router = express.Router();
 
+router.get("/api/users", getUsers);
 router.get("/api/user/:id", getUser);
+router.get("/api/admins", getAdmins)
 router.post("/api/user", createUser);
 router.post("/login", login);
 router.post("/sign-up", signup);

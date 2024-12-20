@@ -22,6 +22,15 @@ export const login = async (req, res) => {
     }
 }
 
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find({ role: "user" });
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const getUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -31,6 +40,15 @@ export const getUser = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const getAdmins = async (req, res) => {
+    try {
+        const admins = await User.find({ role: "admin" });
+        res.status(200).json(admins);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
 
 export const signup = async (req, res) => {
     try {
