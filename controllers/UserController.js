@@ -94,6 +94,8 @@ export const updateTransaction = async (req, res) => {
     const randomBytes = crypto.randomBytes(8).toString('hex');
     const transactionId = timestamp + randomBytes;
     const createdAt = new Date();
+    const user_id = userId;
+
 
     try {
         const result = await User.updateOne(
@@ -103,6 +105,7 @@ export const updateTransaction = async (req, res) => {
                     transaction: {
                         id: transactionId,
                         car_id,
+                        user_id,
                         brand,
                         model,
                         // 

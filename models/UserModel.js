@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
             {
                 id: { type: String, required: true },
                 car_id: { type: String, required: true },
+                user_id: { type: String, required: true },
                 brand: { type: String, required: true },
                 model: { type: String, required: true },
                 // 

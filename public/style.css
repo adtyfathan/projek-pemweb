@@ -1262,6 +1262,14 @@
     color: rgb(160, 160, 160);
 }
 
+.admin-wrapper {
+    position: relative;
+}
+
+/* .user-wrapper {
+    display: none;
+} */
+
 @keyframes reveal {
     0% {
         width: 0;
