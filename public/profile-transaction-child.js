@@ -1,6 +1,12 @@
-const token = localStorage.getItem("token");
-if (!token) {
-    window.location.href = "/login";
+const role = localStorage.getItem("role");
+
+if (role !== "user") {
+    alert("You don't have the access!");
+    if (!role) {
+        window.location.href = "/login";
+    } else {
+        window.location.href = document.referrer;
+    }
 }
 
 function getTransactionId() {

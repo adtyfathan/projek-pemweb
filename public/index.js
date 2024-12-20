@@ -6,8 +6,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         const responseCar = await fetch("/api/cars/top-cars")
         if (!responseCar.ok) throw new Error("Failed to fetch top cars models");
         const data = await responseCar.json();
-
-        console.log(localStorage.getItem("role"));
     
         const slideDiv = document.createElement("div");
         slideDiv.innerHTML = `

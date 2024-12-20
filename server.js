@@ -93,6 +93,10 @@ app.get("/profile-transaction-child/:id", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "profile-transaction-child.html"));
 })
 
+app.get("/admin-main", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin-main.html"));
+})
+
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("connected to mongodb");
