@@ -108,3 +108,53 @@ export const updateCar = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export const insertCar = async (req, res) => {
+    const {
+        brand,
+        model,
+        power,
+        max_speed,
+        acceleration,
+        image,
+        image_overview,
+        image_engine,
+        image_interior,
+        image_exterior,
+        description,
+        power_consumption,
+        price,
+        overview,
+        engine,
+        interior,
+        exterior,
+    } = req.body;
+
+    try {
+        const newCar = new Car({
+            brand,
+            model,
+            power,
+            max_speed,
+            acceleration,
+            image,
+            image_overview,
+            image_engine,
+            image_interior,
+            image_exterior,
+            description,
+            power_consumption,
+            price,
+            overview,
+            engine,
+            interior,
+            exterior,
+        });
+
+        await newCar.save();
+
+        res.status(201).json({ message: "Car added successfully", car: newCar });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

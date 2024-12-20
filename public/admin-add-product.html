@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="/images/Logo.ico">
+    <title>Auto Boost</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="nav-wrapper">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/"><img src="/images/logo.png" width="40" />
+                    <h2>Auto Boost</h2>
+                </a>
+            </div>
+            <div class="nav-menu">
+                <a href="/model">Model</a>
+                <a href="/news">News</a>
+                <a href="/profile-data">Profile</a>
+                <a id="button-logout"><button>Logout</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-wrapper">
+        <div class="profile-wrapper-left">
+            <a id="profile-data" href="/profile-data">My Profile</a>
+            <a id="profile-transaction" href="/profile-transaction">Transactions</a>
+            <a id="profile-account" href="/profile-account">Account</a>
+            <a id="profile-contact" href="/profile-contact">Contact Us</a>
+            <a id="profile-admin" href="/admin-main">Manage</a>
+        </div>
+
+        <div class="profile-wrapper-right">
+            <div id="admin-wrapper" class="admin-wrapper">
+                <h1>Add Product</h1>
+                <form id="form">
+                    <label>Brand</label>
+                    <input id="brand" type="text" value="" required />
+                    <label>Model</label>
+                    <input id="model" type="text" value="" required />
+                    <label>Product Picture</label>
+                    <input id="main-img" type="text" value="" required />
+                    <label>Product Price</label>
+                    <input id="price" type="number" value="" required />
+                    <label>Max Speed (km/h)</label>
+                    <input id="speed" type="number" value="" required />
+                    <label>Acceleration</label>
+                    <input id="acceleration" type="number" step="0.1" value="" required />
+                    <label>Power</label>
+                    <input id="power" type="number" value="" required />
+                    <label>Power Consumption</label>
+                    <input id="power-consumption" type="text" value="" required />
+                    <label>Overview Picture</label>
+                    <input id="overview-img" type="text" value="" required />
+                    <label>Overview Description</label>
+                    <textarea id="overview-desc"></textarea>
+                    <label>Engine Picture</label>
+                    <input id="engine-img" type="text" value="" />
+                    <label>Engine Description</label>
+                    <textarea id="engine-desc"></textarea>
+                    <label>Interior Picture</label>
+                    <input id="interior-img" type="text" value="" />
+                    <label>Interior Description</label>
+                    <textarea id="interior-desc"></textarea>
+                    <label>Exterior Picture</label>
+                    <input id="exterior-img" type="text" value="" />
+                    <label>Exterior Description</label>
+                    <textarea id="exterior-desc"></textarea>
+                    <button type="submit">Add Car</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="/admin-add-product.js"></script>
+</body>
+
+</html>

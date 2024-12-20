@@ -9,6 +9,20 @@ export const getNewses = async (req, res) => {
     }
 };
 
+export const deleteNews = async (req, res) => {
+    try {
+        const news = await News.findByIdAndDelete(req.params.id);
+
+        if (!news) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'News deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const getNews = async (req, res) => {
     try {
         const news = await News.findById(req.params.id);
@@ -79,3 +93,42 @@ export const handleLike = async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 }
+
+export const updateNews = async (req, res) => {
+    const { newsId, title, description, date, image } = req.body;
+    try {
+        const news = await News.updateOne(
+            { _id: newsId },
+            {
+                $set: { title, description, date, image }
+            }
+        );
+        res.status(200).json({ message: "news data changed" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export const insertNews = async (req, res) => {
+    const {
+        title,
+        description,
+        date,
+        image,
+    } = req.body;
+
+    try {
+        const newNews = new News({
+            title,
+            description,
+            date,
+            image,
+        });
+
+        await newNews.save();
+
+        res.status(201).json({ message: "News added successfully", news: newNews });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

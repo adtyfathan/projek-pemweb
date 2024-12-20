@@ -225,6 +225,7 @@ window.onload = async () => {
                     <h1>Manage Product</h1>
                     <img src="/images/user-icon.png" alt="User Icon"/>
                     <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                    <a href="/product-add">Add New</a>
                 </div>
                 <table>
                     <tr>
@@ -295,6 +296,7 @@ window.onload = async () => {
                     <h1>Manage News</h1>
                     <img src="/images/user-icon.png" alt="User Icon"/>
                     <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                    <a href="/news-add">Add New</a>
                 </div>
                 <table>
                     <tr>
@@ -311,7 +313,7 @@ window.onload = async () => {
                         <td>${news._id}</td>
                         <td>${news.title}</td>
                         <td>${news.like}</td>
-                        <td><p>delete</p></td>
+                        <td><a href="/news-edit/${news._id}">Edit</a><p class="delete-btn" data-id="${news._id}">Delete</p></td>
                     </tr>
                 `;
             });
@@ -323,6 +325,29 @@ window.onload = async () => {
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+            });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    const newsId = event.target.getAttribute("data-id");
+                    try {
+                        const response = await fetch(`/api/news/delete-news/${newsId}`, {
+                            method: "DELETE",
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || "Failed to delete news");
+                        }
+
+                        alert("News deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting news:", error);
+                        alert("An error occurred while trying to delete news.");
+                    }
+                });
             });
         });
 
@@ -367,7 +392,7 @@ window.onload = async () => {
                         <td>${formattedDate}</td>
                         <td>${transaksi.total_price}</td>
                         <td>${transaksi.status}</td>
-                        <td><p>delete</p></td>
+                        <td><p class="delete-btn" data-user-id="${transaksi.user_id}" data-id="${transaksi.id}">Delete</p></td>
                     </tr>
                 `;
             });
@@ -379,6 +404,30 @@ window.onload = async () => {
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+            });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    const transactionId = event.target.getAttribute("data-id");
+                    const userId = event.target.getAttribute("data-user-id")
+                    try {
+                        const response = await fetch(`/api/user/${userId}/delete-transaction/${transactionId}`, {
+                            method: "DELETE",
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || "Failed to delete transaction");
+                        }
+
+                        alert("Transaction deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting transaction:", error);
+                        alert("An error occurred while trying to delete transaction.");
+                    }
+                });
             });
         });
 
@@ -417,7 +466,7 @@ window.onload = async () => {
                         <td>${comment.name}</td>
                         <td>${formattedDate}</td>
                         <td>${comment.message}</td>
-                        <td><p>delete</p></td>
+                        <td><p class="delete-btn">Delete</p</td>
                     </tr>
                 `;
             });
@@ -429,6 +478,19 @@ window.onload = async () => {
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+            });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    try {
+                        alert("Transaction deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting transaction:", error);
+                        alert("An error occurred while trying to delete transaction.");
+                    }
+                });
             });
         });
 
