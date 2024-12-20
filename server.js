@@ -97,6 +97,14 @@ app.get("/admin-main", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "admin-main.html"));
 })
 
+app.get("/admin-add", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin-add-admin.html"));
+})
+
+app.get("/product-edit/:id", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "admin-edit-product.html"));
+})
+
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("connected to mongodb");

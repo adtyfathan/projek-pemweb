@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUser, createUser, getAdmins, login, signup, updateTransaction, getTransaction, addLiked, removeLiked, updateProfile, changePassword, getUsers } from '../controllers/UserController.js';
+import { getUser, createUser, getAdmins, login, signup, manageAdmin, updateTransaction, getTransaction, addLiked, removeLiked, updateProfile, deleteUser, changePassword, getUsers } from '../controllers/UserController.js';
 
 const router = express.Router();
 
@@ -7,7 +7,9 @@ router.get("/api/users", getUsers);
 router.get("/api/user/:id", getUser);
 router.get("/api/admins", getAdmins)
 router.post("/api/user", createUser);
+router.delete("/api/delete-user/:id", deleteUser);
 router.post("/login", login);
+router.put("/api/manage-admin/:id", manageAdmin);
 router.post("/sign-up", signup);
 router.post("/api/user/update-transaction", updateTransaction);
 router.post("/api/user/transaction/:id", getTransaction);

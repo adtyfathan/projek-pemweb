@@ -41,6 +41,20 @@ export const createCar = async (req, res) => {
     }
 }
 
+export const deleteCar = async (req, res) => {
+    try {
+        const car = await Car.findByIdAndDelete(req.params.id);
+
+        if (!car) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({ message: 'Car deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const updateCarComments = async (req, res) => {
     const carId = req.params.id;
     const { name, image, score, message } = req.body;
@@ -77,5 +91,20 @@ export const handleLike = async (req, res) => {
         res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+}
+
+export const updateCar = async (req, res) => {
+    const { carId, brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview, engine, interior, exterior } = req.body;
+    try {
+        const car = await Car.updateOne(
+            {_id: carId },
+            {
+                $set: { brand, model, power, max_speed, acceleration, image, image_overview, image_engine, image_interior, image_exterior, description, power_consumption, price, overview, engine, interior, exterior }
+            }
+        );
+        res.status(200).json({ message: "car data changed"});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }

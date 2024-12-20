@@ -70,7 +70,6 @@ window.onload = async () => {
                     <p>Total Transaksi</p>
                 </div>
                 <div>
-                    <img src="/images/edit.png" id="edit-like"/>
                     <h1>${totalLike}</h1>
                     <p>Total Like</p>
                 </div>
@@ -109,18 +108,41 @@ window.onload = async () => {
                         <td>${user._id}</td>
                         <td>${user.username}</td>
                         <td>${user.email}</td>
-                        <td><p>Delete</p></td>
+                        <td><p class="delete-btn" data-id="${user._id}">Delete</p></td>
                     </tr>
                 `;
             });
             userContent += '</table>';
 
             userDiv.innerHTML = userContent;
-            popWrapper.innerHTML = ''; 
+            popWrapper.innerHTML = '';
             popWrapper.appendChild(userDiv);
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+            });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    const userId = event.target.getAttribute("data-id");
+                    try {
+                        const response = await fetch(`/api/delete-user/${userId}`, {
+                            method: "DELETE",
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || "Failed to delete user");
+                        }
+
+                        alert("User deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting user:", error);
+                        alert("An error occurred while trying to delete the user.");
+                    }
+                });
             });
         });
 
@@ -135,6 +157,7 @@ window.onload = async () => {
                     <h1>Manage Admin</h1>
                     <img src="/images/user-icon.png" alt="User Icon"/>
                     <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                    <a href="/admin-add">Add New</a>
                 </div>
                 <table>
                     <tr>
@@ -150,7 +173,7 @@ window.onload = async () => {
                         <td>${admin._id}</td>
                         <td>${admin.username}</td>
                         <td>${admin.email}</td>
-                        <td><p>Delete</p></td>
+                        <td><p class="delete-btn" data-id="${admin._id}">Delete</p></td>
                     </tr>
                 `;
             });
@@ -163,7 +186,252 @@ window.onload = async () => {
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
             });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    const adminId = event.target.getAttribute("data-id");
+                    const role = "user";
+                    try {
+                        const response = await fetch(`/api/manage-admin/${adminId}`, {
+                            method: "PUT",
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ role })
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || "Failed to delete admin");
+                        }
+
+                        alert("Admin deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting admin:", error);
+                        alert("An error occurred while trying to delete the admin.");
+                    }
+                });
+            });
         });
+
+        // product button
+        const productBtn = document.getElementById("edit-product");
+        productBtn.addEventListener("click", () => {
+            const productDiv = document.createElement("div");
+            productDiv.classList.add("pop-wrapper");
+
+            let productContent = `
+                <div>
+                    <h1>Manage Product</h1>
+                    <img src="/images/user-icon.png" alt="User Icon"/>
+                    <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                </div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Model</th>
+                        <th>Brand</th>
+                        <th>Price</th>
+                        <th>Like</th>
+                        <th>Operation</th>
+                    </tr>
+            `;
+
+            cars.forEach(car => {
+                productContent += `
+                    <tr>
+                        <td>${car._id}</td>
+                        <td>${car.model}</td>
+                        <td>${car.brand}</td>
+                        <td>${car.price}</td>
+                        <td>${car.like}</td>
+                        <td><a href="/product-edit/${car._id}">Edit</a><p class="delete-btn" data-id="${car._id}">Delete</p></td>
+                    </tr>
+                `;
+            });
+            productContent += '</table>';
+
+            productDiv.innerHTML = productContent;
+            popWrapper.innerHTML = '';
+            popWrapper.appendChild(productDiv);
+
+            document.getElementById("close-user").addEventListener("click", () => {
+                popWrapper.innerHTML = '';
+            });
+
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", async (event) => {
+                    const carId = event.target.getAttribute("data-id");
+                    try {
+                        const response = await fetch(`/api/delete-car/${carId}`, {
+                            method: "DELETE",
+                        });
+
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || "Failed to delete car");
+                        }
+
+                        alert("Car deleted successfully");
+                        event.target.closest("tr").remove();
+                    } catch (error) {
+                        console.error("Error deleting car:", error);
+                        alert("An error occurred while trying to delete car.");
+                    }
+                });
+            });
+        });
+
+
+        // news button
+        const newsBtn = document.getElementById("edit-news");
+        newsBtn.addEventListener("click", () => {
+            const newsDiv = document.createElement("div");
+            newsDiv.classList.add("pop-wrapper");
+
+            let newsContent = `
+                <div>
+                    <h1>Manage News</h1>
+                    <img src="/images/user-icon.png" alt="User Icon"/>
+                    <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                </div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Like</th>
+                        <th>Operation</th>
+                    </tr>
+            `;
+
+            news.forEach(news => {
+                newsContent += `
+                    <tr>
+                        <td>${news._id}</td>
+                        <td>${news.title}</td>
+                        <td>${news.like}</td>
+                        <td><p>delete</p></td>
+                    </tr>
+                `;
+            });
+            newsContent += '</table>';
+
+            newsDiv.innerHTML = newsContent;
+            popWrapper.innerHTML = '';
+            popWrapper.appendChild(newsDiv);
+
+            document.getElementById("close-user").addEventListener("click", () => {
+                popWrapper.innerHTML = '';
+            });
+        });
+
+
+        // button transaksi
+        const transaksiBtn = document.getElementById("edit-transaksi");
+        transaksiBtn.addEventListener("click", () => {
+            const transaksiDiv = document.createElement("div");
+            transaksiDiv.classList.add("pop-wrapper");
+
+            let transaksiContent = `
+                <div>
+                    <h1>Manage Transaksi</h1>
+                    <img src="/images/user-icon.png" alt="User Icon"/>
+                    <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                </div>
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Model</th>
+                        <th>Account</th>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Operation</th>
+                    </tr>
+            `;
+
+            transactionArr.forEach(transaksi => {
+                const dateStr = transaksi.createdAt;
+                const date = new Date(dateStr);
+
+                const formattedDate = date.getDate().toString().padStart(2, '0') + '/' +
+                    (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                    date.getFullYear();
+
+                transaksiContent += `
+                    <tr>
+                        <td>${transaksi.id}</td>
+                        <td>${transaksi.model}</td>
+                        <td>${transaksi.email}</td>
+                        <td>${formattedDate}</td>
+                        <td>${transaksi.total_price}</td>
+                        <td>${transaksi.status}</td>
+                        <td><p>delete</p></td>
+                    </tr>
+                `;
+            });
+            transaksiContent += '</table>';
+
+            transaksiDiv.innerHTML = transaksiContent;
+            popWrapper.innerHTML = '';
+            popWrapper.appendChild(transaksiDiv);
+
+            document.getElementById("close-user").addEventListener("click", () => {
+                popWrapper.innerHTML = '';
+            });
+        });
+
+
+        // button comment
+        const commentBtn = document.getElementById("edit-comment");
+        commentBtn.addEventListener("click", () => {
+            const commentDiv = document.createElement("div");
+            commentDiv.classList.add("pop-wrapper");
+
+            let commentContent = `
+                <div>
+                    <h1>Manage Comment</h1>
+                    <img src="/images/user-icon.png" alt="User Icon"/>
+                    <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                </div>
+                <table>
+                    <tr>
+                        <th>Username</th>
+                        <th>Date</th>
+                        <th>Comment</th>
+                        <th>Operation</th>
+                    </tr>
+            `;
+
+            commentArr.forEach(comment => {
+                const dateStr = comment.createdAt;
+                const date = new Date(dateStr);
+
+                const formattedDate = date.getDate().toString().padStart(2, '0') + '/' +
+                    (date.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                    date.getFullYear();
+
+                commentContent += `
+                    <tr>
+                        <td>${comment.name}</td>
+                        <td>${formattedDate}</td>
+                        <td>${comment.message}</td>
+                        <td><p>delete</p></td>
+                    </tr>
+                `;
+            });
+            commentContent += '</table>';
+
+            commentDiv.innerHTML = commentContent;
+            popWrapper.innerHTML = '';
+            popWrapper.appendChild(commentDiv);
+
+            document.getElementById("close-user").addEventListener("click", () => {
+                popWrapper.innerHTML = '';
+            });
+        });
+
 
     } catch (error) {
         console.error("Error loading data:", error);
