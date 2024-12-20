@@ -9,31 +9,38 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="./styles/auth.css">
 </head>
 
 <body>
     <div class="auth-wrapper">
         <div class="auth-container">
-            <div class="auth-header">
-                <img src="/images/logo.png" />
-                <h1>Auto Boost</h1>
+            <div class="form-side">
+                <span id="judul">LOGIN</span>
+                <form class="auth-form">
+                    <div class="input-group">
+                        <img id="email-logo" src="/images/auth-email-icon.png" alt="">
+                        <img class="line" src="/images/line-auth.png" alt="">
+                        <input id="input-email" type="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <img id="pass-logo" src="/images/auth-pass-icon.png" alt="">
+                        <img id="line-pass" class="line" src="/images/line-auth.png" alt="">
+                        <input id="input-password" type="password" name="password" placeholder="Enter your password" required>
+                        <img class="toggle-password" src="/images/eye.png">
+                    </div>
+
+                    <input id="login-button" type="submit" class="profile-button"/>
+                </form>
             </div>
-            <form class="auth-form">
-                <div class="auth-row">
-                    <label for="input-email">Email</label>
-                    <input type="email" id="input-email" name="email" required>
+            <div class="logo-side">
+                <div class="logo">
+                    <img src="/images/logo.png" />
+                    <h1>Auto Boost</h1>
                 </div>
-    
-                <label for="input-password">Password</label>
-                <div class="password-input" style="margin-bottom: 20px;">
-                    <input id="input-password" type="password" name="password" required />
-                    <img class="toggle-password" src="/images/eye.png" />
-                </div>
-    
-                <p style="align-self: center; margin: 20px 0;">No account? <a href="/sign-up">sign up</a></p>
-                <input id="login-button" type="submit" class="profile-button" style="width: fit-content; align-self: center;" />
-            </form>
+                <p>"If you don't have an account yet,<br>come join and start your journal with us."</p>
+                <a href="sign-up.html" id="masuk-btn">Sign Up</a>
+            </div>
         </div>
     </div>
     

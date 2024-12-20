@@ -119,7 +119,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 })
 
-document.getElementById("button-logout").addEventListener("click", () => {
+document.getElementById("button-login").addEventListener("click", () => {
     localStorage.clear();
     window.location.href = "/login";
 });
+
+const role = localStorage.getItem("role");
+
+if (role) {
+    document.getElementById("button-login").style.display = "none";
+}
