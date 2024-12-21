@@ -1263,7 +1263,14 @@
 }
 
 .admin-wrapper {
-    position: relative;
+    display: flex;
+    justify-content: space-around;
+}
+
+.admin-container {
+    padding: 20px 30px;
+    border: 1px solid black;
+    flex: 1;
 }
 
 /* .user-wrapper {

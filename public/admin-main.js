@@ -43,37 +43,37 @@ window.onload = async () => {
 
         const contentDiv = document.createElement("div");
         contentDiv.innerHTML = `
-            <div>
-                <div>
+            <div class="admin-wrapper">
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-user"/>
                     <h1>${users.length}</h1>
                     <p>Total User</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-admin"/>
                     <h1>${admins.length}</h1>
                     <p>Total Admin</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-product"/>
                     <h1>${cars.length}</h1>
                     <p>Total Products</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-news"/>
                     <h1>${news.length}</h1>
                     <p>Total News</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-transaksi"/>
                     <h1>${transactionArr.length}</h1>
                     <p>Total Transaksi</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <h1>${totalLike}</h1>
                     <p>Total Like</p>
                 </div>
-                <div>
+                <div class="admin-container">
                     <img src="/images/edit.png" id="edit-comment"/>
                     <h1>${commentArr.length}</h1>
                     <p>Total Comment</p>
