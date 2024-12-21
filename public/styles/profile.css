@@ -493,10 +493,74 @@
     border: black;
 }
 
+.pop-wrapper table a {
+    text-decoration: none;
+    color: black;
+}
 
+.pop-wrapper table p {
+    color: red;
+    cursor: pointer;
+}
 
 #close-user {
     width: 52.77px;
     height: 66px;
 
+}
+
+/* ADD PRODUCT */
+
+.form {
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form input {
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid black;
+    outline: none;
+    width: 289px;
+    height: 32px;
+    border-radius: 10px;
+    padding-left: 13px;
+}
+
+.form div {
+    display: flex;
+    align-items: center;
+    gap: 41px;
+}
+
+.form textarea {
+    width: 289px;
+    height: 32px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding-left: 13px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.form button {
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 9px 33px;
+    margin-left: 90%;
+    margin-bottom: 36px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.form button:hover {
+    background-color: white;
+    color: black;
 }

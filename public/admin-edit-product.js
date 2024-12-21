@@ -32,39 +32,65 @@ const fetchCarData = async (carId) => {
 
 const createCarForm = (car) => {
     const form = document.createElement("form");
+    form.classList.add("form")
     form.innerHTML = `
-        <label>Brand</label>
-        <input id="brand" type="text" value="${car.brand}" required />
-        <label>Model</label>
-        <input id="model" type="text" value="${car.model}" required />
-        <label>Product Picture</label>
-        <input id="main-img" type="text" value="${car.image}" required />
-        <label>Product Price</label>
-        <input id="price" type="number" value="${car.price}" required />
-        <label>Max Speed (km/h)</label>
-        <input id="speed" type="number" value="${car.max_speed}" required />
-        <label>Acceleration</label>
-        <input id="acceleration" type="number" step="0.1" value="${car.acceleration}" required />
-        <label>Power</label>
-        <input id="power" type="number" value="${car.power}" required />
-        <label>Power Consumption</label>
-        <input id="power-consumption" type="text" value="${car.power_consumption}" required />
-        <label>Overview Picture</label>
-        <input id="overview-img" type="text" value="${car.image_overview}" required />
-        <label>Overview Description</label>
-        <textarea id="overview-desc">${car.description}</textarea>
-        <label>Engine Picture</label>
-        <input id="engine-img" type="text" value="${car.image_engine}" />
-        <label>Engine Description</label>
-        <textarea id="engine-desc">${car.engine}</textarea>
-        <label>Interior Picture</label>
-        <input id="interior-img" type="text" value="${car.image_interior}" />
-        <label>Interior Description</label>
-        <textarea id="interior-desc">${car.interior}</textarea>
-        <label>Exterior Picture</label>
-        <input id="exterior-img" type="text" value="${car.image_exterior}" />
-        <label>Exterior Description</label>
-        <textarea id="exterior-desc">${car.exterior}</textarea>
+        <div>
+            <label>Brand</label>
+            <input id="brand" type="text" value="${car.brand}" required placeholder="blah blah blah"/>
+
+            <label>Model</label>
+            <input id="model" type="text" value="${car.model}" required placeholder="blah blah blah"/>
+        </div>
+        <div>
+            <label>Product Picture</label>
+            <input id="main-img" type="text" value="${car.image}" required placeholder="/path"/>
+
+            <label>Product Price</label>
+            <input id="price" type="number" value="${car.price}" required placeholder="blah blah blah"/>
+        </div>
+        <div>
+            <label>Max Speed (km/h)</label>
+            <input id="speed" type="number" value="${car.max_speed}" required placeholder="blah blah blah"/>
+
+            <label>Acceleration</label>
+            <input id="acceleration" type="number" step="0.1" value="${car.acceleration}" required placeholder="blah blah blah"/>
+        </div>
+        <div>
+            <label>Power</label>
+            <input id="power" type="number" value="${car.power}" required placeholder="blah blah blah"/>
+
+            <label>Power Consumption</label>
+            <input id="power-consumption" type="text" value="${car.power_consumption}" required placeholder="blah blah blah"/>
+        </div>
+        <div>
+            <label>Overview Picture</label>
+            <input id="overview-img" type="text" value="${car.image_overview}" required placeholder="/path"/>
+
+            <label>Overview Description</label>
+            <textarea id="overview-desc" placeholder="blah blah blah">${car.description}</textarea>
+        </div>
+        <div>
+            <label>Engine Picture</label>
+            <input id="engine-img" type="text" value="${car.image_engine}" placeholder="/path"/>
+
+            <label>Engine Description</label>
+            <textarea id="engine-desc" placeholder="blah blah blah">${car.engine}</textarea>
+        </div>
+        <div>
+            <label>Interior Picture</label>
+            <input id="interior-img" type="text" value="${car.image_interior}" placeholder="/path"/>
+
+            <label>Interior Description</label>
+            <textarea id="interior-desc" placeholder="blah blah blah">${car.interior}</textarea>
+        </div>
+        <div>
+            <label>Exterior Picture</label>
+            <input id="exterior-img" type="text" value="${car.image_exterior}" placeholder="/path"/>
+
+            <label>Exterior Description</label>
+            <textarea id="exterior-desc" placeholder="blah blah blah">${car.exterior}</textarea>
+        </div>
+
         <button type="submit">Update Car</button>
     `;
     return form;

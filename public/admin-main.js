@@ -150,71 +150,75 @@ window.onload = async () => {
         // admin button
         const adminBtn = document.getElementById("edit-admin");
         adminBtn.addEventListener("click", () => {
-            const adminDiv = document.createElement("div");
-            adminDiv.classList.add("pop-wrapper");
+            if (role !== "owner") {
+                alert("Admin tidak memiliki akses untuk fitur ini!");
+            } else {
+                const adminDiv = document.createElement("div");
+                adminDiv.classList.add("pop-wrapper");
 
-            let adminContent = `
-                <div>
-                    <h1>Manage Admin</h1>
-                    <img src="/images/user-icon.png" alt="User Icon"/>
-                    <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
-                    <a href="/admin-add">Add New</a>
-                </div>
-                <table>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Operation</th>
-                    </tr>
-            `;
-            admins.forEach(admin => {
-                adminContent += `
-                    <tr>
-                        <td>${admin._id}</td>
-                        <td>${admin.username}</td>
-                        <td>${admin.email}</td>
-                        <td><p class="delete-btn" data-id="${admin._id}">Delete</p></td>
-                    </tr>
+                let adminContent = `
+                    <div>
+                        <h1>Manage Admin</h1>
+                        <img src="/images/user-icon.png" alt="User Icon"/>
+                        <img src="/images/close-icon.png" alt="Close Icon" id="close-user"/>
+                        <a href="/admin-add">Add New</a>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Operation</th>
+                        </tr>
                 `;
-            });
-            adminContent += '</table>';
-
-            adminDiv.innerHTML = adminContent;
-            popWrapper.innerHTML = '';
-            popWrapper.appendChild(adminDiv);
-            document.getElementById("pop-wrapper").classList.add("show");
-
-            document.getElementById("close-user").addEventListener("click", () => {
-                popWrapper.innerHTML = '';
-                document.getElementById("pop-wrapper").classList.remove("show");
-            });
-
-            const deleteButtons = document.querySelectorAll(".delete-btn");
-            deleteButtons.forEach(button => {
-                button.addEventListener("click", async (event) => {
-                    const adminId = event.target.getAttribute("data-id");
-                    const role = "user";
-                    try {
-                        const response = await fetch(`/api/manage-admin/${adminId}`, {
-                            method: "PUT",
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ role })
-                        });
-
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            throw new Error(errorData.message || "Failed to delete admin");
-                        }
-
-                        alert("Admin deleted successfully");
-                        event.target.closest("tr").remove();
-                    } catch (error) {
-                        console.error("Error deleting admin:", error);
-                        alert("An error occurred while trying to delete the admin.");
-                    }
+                admins.forEach(admin => {
+                    adminContent += `
+                        <tr>
+                            <td>${admin._id}</td>
+                            <td>${admin.username}</td>
+                            <td>${admin.email}</td>
+                            <td><p class="delete-btn" data-id="${admin._id}">Delete</p></td>
+                        </tr>
+                    `;
                 });
-            });
+                adminContent += '</table>';
+
+                adminDiv.innerHTML = adminContent;
+                popWrapper.innerHTML = '';
+                popWrapper.appendChild(adminDiv);
+                document.getElementById("pop-wrapper").classList.add("show");
+
+                document.getElementById("close-user").addEventListener("click", () => {
+                    popWrapper.innerHTML = '';
+                    document.getElementById("pop-wrapper").classList.remove("show");
+                });
+
+                const deleteButtons = document.querySelectorAll(".delete-btn");
+                deleteButtons.forEach(button => {
+                    button.addEventListener("click", async (event) => {
+                        const adminId = event.target.getAttribute("data-id");
+                        const role = "user";
+                        try {
+                            const response = await fetch(`/api/manage-admin/${adminId}`, {
+                                method: "PUT",
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ role })
+                            });
+
+                            if (!response.ok) {
+                                const errorData = await response.json();
+                                throw new Error(errorData.message || "Failed to delete admin");
+                            }
+
+                            alert("Admin deleted successfully");
+                            event.target.closest("tr").remove();
+                        } catch (error) {
+                            console.error("Error deleting admin:", error);
+                            alert("An error occurred while trying to delete the admin.");
+                        }
+                    });
+                });
+            }
         });
 
         // product button

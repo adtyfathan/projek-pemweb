@@ -32,6 +32,7 @@ const fetchNewsData = async (newsId) => {
 
 const createNewsForm = (news) => {
     const form = document.createElement("form");
+    form.classList.add("form")
     form.innerHTML = `
         <label>Title</label>
         <input id="title" type="text" value="${news.title}" required />
