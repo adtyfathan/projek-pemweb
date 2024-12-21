@@ -1,0 +1,502 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* NAVBAR */
+
+.nav-wrapper {
+    width: 100%;
+    background-color: #181818;
+    color: white;
+    position: fixed;
+    top: 0%;
+    z-index: 99;
+    padding: 15px 7.5%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-logo {
+    flex: 1;
+}
+
+.nav-logo a {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-menu {
+    flex: 5;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 4%;
+}
+
+.nav-menu a {
+    font-weight: 500;
+}
+
+/* PROFIL */
+
+.profile-wrapper {
+    height: 100vh;
+    display: flex;
+    padding: 160px 99px 0px 81px;
+    gap: 92px;
+}
+
+.profile-wrapper-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 205px;
+    gap: 67px;
+}
+
+.profile-wrapper-right {
+    width: 100%;
+    margin-bottom: 67px;
+}
+
+/* SIDEBAR */
+
+.profile-wrapper-left a {
+    width: 205px;
+    height: 52px;
+    text-decoration: none;
+    color: black;
+    font-size: 24px;
+    font-weight: 500;
+    padding-left: 30px;
+    padding-top: 8px;
+}
+
+.profile-wrapper-left .profile-active {
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+#button-logout {
+    margin-top: 80%;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#button-logout button {
+    background-color: transparent;
+    border: transparent;
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+/* MY PROFIL */
+
+.profile-data-container {
+    position: relative;
+    border-radius: 33px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+}
+
+.profile-top {
+    width: 100%;
+    height: 208px;
+    display: flex;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.25);
+    padding-left: 40px;
+    padding-top: 24px;
+    gap: 53px;
+}
+
+.profile-top h1 {
+    align-self: center;
+}
+
+.profile-data-pp {
+    width: 167.78px;
+    height: 167.78px;
+    border-radius: 100%;
+}
+
+.profile-data-content {
+    padding-left: 40px;
+    padding-top: 24px;
+    padding-right: 265px;
+}
+
+#profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.profile-data-row {
+    display: flex;
+    align-items: center;
+}
+
+.profile-data-row label {
+    flex: 1;
+}
+
+.profile-data-row input {
+    flex: 3;
+    width: 100%;
+    padding: 8px 26px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.profile-button {
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 9px 33px;
+    margin-left: 90%;
+    margin-bottom: 36px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
+
+.profile-button:hover {
+    background-color: white;
+    color: black;
+}
+
+/* ACCOUNT */
+
+.profile-account-wrapper {
+    position: relative;
+    border-radius: 33px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+    padding-left: 48px;
+    padding-top: 25px;
+    padding-right: 265px;
+}
+
+#profile-account-form h1 {
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+#profile-account-form h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.profile-input-email {
+    width: 100%;
+    background-color: #e7e7e7;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-top: 12px;
+    padding: 6px 20px;
+    font-size: 20px;
+}
+
+.password-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 4px 20px;
+    margin-top: 12px;
+    margin-bottom: 29px;
+}
+
+.password-input input {
+    width: 100%;
+    border: none;
+    font-size: 20px;
+}
+
+.password-input input:focus {
+    outline: none;
+}
+
+.password-input img {
+    width: 24px;
+    cursor: pointer;
+}
+
+/* CONTACT US */
+
+.contact-wrapper {
+    position: relative;
+    border-radius: 33px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+    padding-left: 40px;
+    padding-top: 15px;
+    padding-right: 265px;
+}
+
+.contact-text {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+
+.contact-text h1 {
+    margin-bottom: 10px;
+}
+
+.contact-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.contact-form form {
+    width: 70%;
+    padding: 10px 30px;
+    display: flex;
+    border-radius: 5px;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+}
+
+.contact-form input {
+    background-color: rgb(250, 250, 250);
+    padding: 12px 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(210, 210, 210);
+}
+
+.contact-form textarea {
+    background-color: rgb(250, 250, 250);
+    padding: 12px 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(210, 210, 210);
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contact-button {
+    color: white;
+    border: 0.5px solid rgba(100, 100, 100, 0.404);
+    padding: 18px 65px;
+    font-size: 16px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    cursor: pointer;
+    width: 30%;
+    margin-top: 40px;
+}
+
+.contact-button:hover {
+    color: rgb(160, 160, 160);
+}
+
+/* TRANSACTION */
+
+.profile-transaction-container {
+    position: relative;
+    border-radius: 33px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+}
+
+.profile-transaction-container h1 {
+    margin-left: 36px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+}
+
+.transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 169px;
+}
+
+.transaction-table thead {
+    background-color: black;
+    color: white;
+}
+
+.transaction-table-row {
+    padding-top: 13px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+/* TRANSACTION INVOICE */
+
+.profile-transaction-child-container {
+    width: 100%;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px 40px;
+}
+
+.transaction-back {
+    width: 48px;
+    transform: rotate(180deg);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.profile-transaction-child-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 7.5%;
+}
+
+.profile-transaction-child-container-left {
+    flex: 1;
+}
+
+.profile-transaction-child-container-right {
+    flex: 1;
+}
+
+.profile-transaction-child-sub {
+    margin: 15px 0;
+}
+
+.profile-transaction-child-table {
+    width: 100%;
+}
+
+.profile-transaction-child-table td {
+    padding: 5px 0;
+}
+
+/* MANAGE */
+
+.admin-wrapper {
+    position: relative;
+    border-radius: 33px;
+    height: fit-content;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+    padding: 15px 40px 10% 40px ;
+}
+
+.content-container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5%;
+    row-gap: 42px;
+}
+
+.manage-container {
+    width: 283px;
+    height: 190px;
+    border-radius: 33px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 9px 20px;
+}
+
+.manage-container img {
+    align-self: flex-end;
+}
+
+.manage-container h1 {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.manage-container p {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.popup {
+    position: absolute;
+    background-color: white;
+    width:  75%;
+    height: fit-content;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.25);
+    border-radius: 40px;
+    display: none;
+}
+
+.popup.show {
+    display: block;
+}
+
+.pop-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.pop-wrapper div {
+    display: flex;
+    margin-left: 50px;
+}
+
+.pop-wrapper div h1 {
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.pop-wrapper div img {
+    width: 50px;
+    margin-left: 11px;
+}
+
+.pop-wrapper table {
+    width: 100%;
+}
+
+.pop-wrapper table tr th {
+    color: white;
+    background-color: black;
+    font-size: 20px;
+    font-weight: 400;
+    border: black;
+}
+
+
+
+#close-user {
+    width: 52.77px;
+    height: 66px;
+
+}

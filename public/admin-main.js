@@ -42,43 +42,42 @@ window.onload = async () => {
         const commentArr = [...cars, ...news].flatMap(item => item.comment);
 
         const contentDiv = document.createElement("div");
+        contentDiv.classList.add("content-container");
         contentDiv.innerHTML = `
-            <div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-user"/>
                     <h1>${users.length}</h1>
                     <p>Total User</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-admin"/>
                     <h1>${admins.length}</h1>
                     <p>Total Admin</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-product"/>
                     <h1>${cars.length}</h1>
                     <p>Total Products</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-news"/>
                     <h1>${news.length}</h1>
                     <p>Total News</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-transaksi"/>
                     <h1>${transactionArr.length}</h1>
                     <p>Total Transaksi</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <h1>${totalLike}</h1>
                     <p>Total Like</p>
                 </div>
-                <div>
+                <div class="manage-container">
                     <img src="/images/edit.png" id="edit-comment"/>
                     <h1>${commentArr.length}</h1>
                     <p>Total Comment</p>
                 </div>
-            </div>
         `;
         adminWrapper.appendChild(contentDiv);
 
@@ -117,9 +116,11 @@ window.onload = async () => {
             userDiv.innerHTML = userContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(userDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -182,9 +183,11 @@ window.onload = async () => {
             adminDiv.innerHTML = adminContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(adminDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -255,9 +258,11 @@ window.onload = async () => {
             productDiv.innerHTML = productContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(productDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -322,9 +327,11 @@ window.onload = async () => {
             newsDiv.innerHTML = newsContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(newsDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -401,9 +408,11 @@ window.onload = async () => {
             transaksiDiv.innerHTML = transaksiContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(transaksiDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -475,9 +484,11 @@ window.onload = async () => {
             commentDiv.innerHTML = commentContent;
             popWrapper.innerHTML = '';
             popWrapper.appendChild(commentDiv);
+            document.getElementById("pop-wrapper").classList.add("show");
 
             document.getElementById("close-user").addEventListener("click", () => {
                 popWrapper.innerHTML = '';
+                document.getElementById("pop-wrapper").classList.remove("show");
             });
 
             const deleteButtons = document.querySelectorAll(".delete-btn");

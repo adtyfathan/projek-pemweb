@@ -28,18 +28,21 @@ window.onload = async() => {
         const contentDiv = document.createElement("div");
         contentDiv.classList.add("profile-data-container");
         contentDiv.innerHTML = `
-            <img src="/images/banner.jpg" class="profile-data-banner"/>
+            <div class="profile-top">
+                <img src="${user.image}" class="profile-data-pp"/>
+                <h1>Hello ${user.username}!</h1>
+            </div>
             <div class="profile-data-content">
                 <form id="profile-form">
-                    <img src="${user.image}" class="profile-data-pp"/>
-                    <div class="profile-data-header">
-                        <h1>Hello ${user.username}!</h1>
-                        <input type="submit" value="Save" class="profile-button"/>
-                    </div>
 
                     <div class="profile-data-row">
                         <label>Username</label>
                         <input id="profile-username" type="text" value="${user.username}" placeholder="username" required/>
+                    </div>
+
+                    <div class="profile-data-row">
+                        <label>Phone Number</label>
+                        <input id="profile-phone-number" type="number" value="${(user.phone_number === null) ? "" : user.phone_number}" placeholder="phone number" required/>
                     </div>
 
                     <div class="profile-data-row">
@@ -67,10 +70,7 @@ window.onload = async() => {
                         <input id="profile-postal-code" type="number" value="${(user.postal_code === null) ? "" : user.postal_code}" placeholder="postal code" required/>
                     </div>
 
-                    <div class="profile-data-row">
-                        <label>Phone Number</label>
-                        <input id="profile-phone-number" type="number" value="${(user.phone_number === null) ? "" : user.phone_number}" placeholder="phone number" required/>
-                    </div>
+                    <input type="submit" value="Save" class="profile-button"/>
                 </form>
             </div>
         `;
