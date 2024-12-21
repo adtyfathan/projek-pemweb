@@ -103,11 +103,6 @@ window.onload = async function () {
             displayPrice();
         })
 
-        document.getElementById("button-logout").addEventListener("click", () => {
-            localStorage.clear();
-            window.location.href = "/login";
-        });
-
         function countPrice(){
             orderPrice = priceInt * qty;
             deliveryPrice = orderPrice * 0.0005;

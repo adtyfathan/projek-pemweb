@@ -44,65 +44,36 @@ window.onload = async () => {
         const contentDiv = document.createElement("div");
         contentDiv.classList.add("content-container");
         contentDiv.innerHTML = `
-<<<<<<< HEAD
-            <div class="admin-wrapper">
-                <div class="admin-container">
-=======
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-user"/>
                     <h1>${users.length}</h1>
                     <p>Total User</p>
                 </div>
-<<<<<<< HEAD
-                <div class="admin-container">
-=======
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-admin"/>
                     <h1>${admins.length}</h1>
                     <p>Total Admin</p>
                 </div>
-<<<<<<< HEAD
-                <div class="admin-container">
-=======
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-product"/>
                     <h1>${cars.length}</h1>
                     <p>Total Products</p>
                 </div>
-<<<<<<< HEAD
-                <div class="admin-container">
-=======
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-news"/>
                     <h1>${news.length}</h1>
                     <p>Total News</p>
                 </div>
-<<<<<<< HEAD
-                <div class="admin-container">
-=======
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-transaksi"/>
                     <h1>${transactionArr.length}</h1>
                     <p>Total Transaksi</p>
                 </div>
-<<<<<<< HEAD
-                <div class="admin-container">
-                    <h1>${totalLike}</h1>
-                    <p>Total Like</p>
-                </div>
-                <div class="admin-container">
-=======
                 <div class="manage-container">
                     <h1>${totalLike}</h1>
                     <p>Total Like</p>
                 </div>
                 <div class="manage-container">
->>>>>>> 693ce0758a98810976cdc16b73d162fd399ec1cf
                     <img src="/images/edit.png" id="edit-comment"/>
                     <h1>${commentArr.length}</h1>
                     <p>Total Comment</p>
